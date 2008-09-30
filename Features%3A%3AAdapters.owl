@@ -1,7 +1,6 @@
-====== Adapters ======
 Ramaze takes advantage of the rack library to provide a common way of handling different ways to serve its content.
 
-===== Thin =====
+== Thin ==
 [hTTp://code.macournoyer.com/thin/ Thin] is a fast and simple HTTP server based on Mongrel and EventMachine. Read more on [hTTp://www.rubyinside.com/thin-a-ruby-http-daemon-thats-faster-than-mongrel-688.html RubyInside], or check out its [hTTp://groups.google.com/group/thin-ruby google group]
 
 {{{ ruby
