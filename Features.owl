@@ -3,5 +3,5 @@ Ramaze is all about giving the developer freedom to use the right tools for the 
   * [[Features::Adapters]]
   * [[Features::Helpers]]
   * [[Features::Templates]]
-  * [[Features:Loggers]]
-  * [[Features:ORMs]]
+  * [[Features::Loggers]]
+  * [[Features::ORMs]]
