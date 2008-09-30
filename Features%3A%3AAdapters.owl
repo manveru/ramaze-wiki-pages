@@ -1,0 +1,50 @@
+====== Adapters ======
+Ramaze takes advantage of the rack library to provide a common way of handling different ways to serve its content.
+
+===== Thin =====
+[hTTp://code.macournoyer.com/thin/ Thin] is a fast and simple HTTP server based on Mongrel and EventMachine. Read more on [hTTp://www.rubyinside.com/thin-a-ruby-http-daemon-thats-faster-than-mongrel-688.html RubyInside], or check out its [hTTp://groups.google.com/group/thin-ruby google group]
+
+{{{ ruby
+Ramaze.start :adapter => :thin
+}}}
+
+===== Mongrel =====
+[http://mongrel.rubyforge.org/ Mongrel] is a fast HTTP library and server for Ruby that is intended for hosting Ruby web applications of any kind using plain HTTP rather than FastCGI or SCGI
+
+{{{ ruby
+Ramaze.start :adapter => :mongrel
+}}}
+
+==== Evented Mongrel ====
+[hTTp://swiftiply.swiftcore.org/mongrel.html Evented Mongrel] is a monkey-patch to Mongrel (available via the swiftiply gem) to use EventMachine's event-based network architecture instead of Mongrel's default threaded model
+
+{{{ ruby
+Ramaze.start :adapter => :evented_mongrel
+}}}
+
+==== Swifiplied Mongrel ====
+
+{{{ ruby
+Ramaze.start :adapter => :swiftiplied_mongrel
+}}}
+
+===== WEBrick =====
+[hTTp://www.webrick.org/ WEBrick] is a Ruby library program to build HTTP servers.
+
+{{{ ruby
+Ramaze.start :adapter => :webrick
+}}}
+
+===== CGI =====
+CGI is the Common Gateway Interface and is one of the most basic ways to integrate into Webservers like Apache or Lighttpd.
+
+{{{ ruby
+Ramaze.start :adapter => :cgi
+}}}
+
+===== FCGI =====
+Improvment of CGI as it doesn't start up a new connection to Ramaze on every request
+
+{{{ ruby
+Ramaze.start :adapter => :fcgi
+}}}
