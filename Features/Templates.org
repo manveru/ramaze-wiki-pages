@@ -1,0 +1,262 @@
+* Features/Templates
+** Templating Basics
+
+Ramaze supports most of the popular templating engines out of the box, and supports both inline and external templates.
+If an external template is found, the return value of an action is ignored and the template is rendered to the browser.
+Otherwise, the return value of the action is run through the templating engine associated with the controller.
+Templates are merely files that are used to produce output.
+By default ramaze looks for a template of the same name as the action in the 'view/' directory.
+So, to use external templates, simply create a file with the name of the action in the 'view/' directory.
+By default, most template extensions follow the name of the Engine, so action => index, engine => haml == index.haml
+
+controllers/main.rb
+{{{ ruby
+class MainController < Ramaze::Controller
+  engine :Haml
+  def index
+    @content = 'my_content'
+  end
+end
+}}}
+view/index.haml
+<code html>
+!!!
+%html
+  = @content
+}}}
+
+To look in a different subdirectory, set your own ''template_root''.
+For example, to look for templates in a ''other_views/'' subdirectory, use:
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  template_root 'other_views'
+end
+}}}
+
+For controllers with custom mappings, Ramaze will look for templates either under a subdirectory of the same name as the mapping, or for a file where each forward slash is replaced by two underscores:
+
+{{{ ruby
+class CSSController < Ramaze::Controller
+  map '/css'
+  engine :Sass
+  def style
+    # use view/css/style.sass
+    # or view/css__style.sass
+  end
+end
+}}}
+
+To tie an action to a template using a different name than the action, use the ''template'' command.
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def index; end
+  template :index, 'other.xhtml'
+end
+}}}
+
+Usually your action will perform validation and cleanup of incoming GET/POST variables, and set instance variables that are used by the layout/template.
+In case no validation or instance variables are required, the action stub can be omitted.
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  template_root :template
+  # if view/index.xhtml exists, then http://localhost:7000/index will use it
+  # a def index; end stub is not required here
+end
+}}}
+
+Ramaze will only look for templates supported by the currently loaded templating engines.
+ Given a controller using ''engine :Haml'', it will search the ''view/'' subdirectory for files that match ''*.haml''. To use Haml templates without setting Haml as the default engine:
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  engine :None
+  def index
+    # this will not be interpretted as a Haml template
+    # since default engine for this controller is None
+    '%html'
+  end
+end
+
+# look for and render .sass and .haml templates for actions,
+# if they exist, and no other engine specified
+Ramaze.start :load_engines => [:Haml, :Sass]
+}}}
+
+To ignore any templates and render a string directly to the browser, use ''respond'':
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def hidden
+    respond 'Page not found', 404  # send 404
+    # never reaches this code, and ignores templates/hidden.xhtml
+    'this is hidden'
+  end
+end
+}}}
+
+To bypass the default template for an action and use another,  use ''respond'' with ''render_template'':
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def foobar
+    # Some basic code to set up some values, then ...
+    if some_special_condition? # some custom method
+       # Use a different template for special circumstances
+       respond(  render_template "my_special_template.xhtml" )
+    end
+
+    # Otherwise, do whatever else may be needed and allow the default
+    # template to render
+    ...
+  end
+end
+}}}
+
+** Templating Engines
+
+Ramaze supports a variety of templating engines out of the box (Liquid, Redcloth - ie Markdown, Textile etc, and others), and its modular nature makes it very simple to add support for more. For more information, check out the [[http://source.ramaze.net/#/examples/templates/template|template examples]] or take a look at how template engines are [[http://source.ramaze.net/#/lib/ramaze/template/none.rb|implemented]].
+
+The easiest way to see if your template engine is supported is to browse the source (Template engines are listed in /lib/ramaze/template/):
+
+[[http://source.ramaze.net/#/lib/ramaze/template]]
+
+If template engines require options to be set they can be set through the controller 'trait' command like so:
+
+{{{ ruby
+class FooController
+  engine :haml
+  trait :haml_options => {}
+end
+}}}
+
+{{{ ruby
+class FooController
+  engine :redcloth
+  trait :redcloth_options => []
+end
+}}}
+
+Note that the following examples use this snippet (which is included in Ramaze) for indented inline templates:
+
+{{{ ruby
+class String
+  def unindent
+    strip.gsub(/^#{ self.split("\n")[1][/^(\s+)/,1] }/, '')
+  end
+end
+}}}
+
+** Amrita2
+[[http://amrita2.rubyforge.org/][Amrita2]] is a xml/xhtml template library for Ruby. It makes html documents from a template and a model data
+
+** Erubis
+[[http://rubyforge.org/projects/erubis][Erubis]] is a fast, secure, and very extensible implementation of eRuby
+
+It uses <%= expr %> to output data and <%== expr %> to do the same with HTML escaping. <% code %> allows any Ruby code to run for flow control.
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  engine :Erubis
+  def index name = 'Anon'
+    @greeting = 'Hello'
+    @name = name
+    @chars = ('a'..'f')
+    %q{
+<html>
+  <head><title>Erubis Example</title></head>
+  <body>
+  <h1><%= @greeting %> <%== @name %></h1>
+  <div>
+    Characters for you: <% for char in @chars %> <%== char %><% end %>
+  </div>
+  </body>
+</html>
+    }
+  end
+end
+}}}
+
+** Haml
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  engine :Haml
+  def index
+    %(
+      !!!
+      %html
+        %head
+          %title My Haml Page
+        %body
+          #header
+            %h2 Welcome!
+          #content
+            hi there!
+          #footer
+            %span.small
+              %a{ :href => 'http://ramaze.net' } Powered by Ramaze
+    ).unindent
+  end
+end
+}}}
+
+[[http://haml.hamptoncatlin.com/][Haml]] takes your gross, ugly templates and replaces them with veritable Haiku. You can try Haml out in the [[http://lab.hamptoncatlin.com/play/with/haml][Haml playground]].
+
+
+** Sass
+{{{ ruby
+class CSSController
+  map '/css'
+  engine :Sass
+
+  define_method('style.css') do # accessed via /css/style.css
+    %(
+      !hover  = #f00
+      !normal = #00f
+
+      body
+        font:
+          family: sans-serif monospace
+          size: 11px
+        margin: 1em
+        padding: 0
+
+        #content
+          a
+            color= !normal
+            &:hover
+              color= !hover
+    ).unindent
+  end
+
+  # for a full featured example with caching:
+  # http://source.ramaze.net/#/examples/css.rb
+end
+}}}
+
+[[http://haml.hamptoncatlin.com/docs/sass][Sass]] is a meta-language on top of CSS that's used to describe the style of a document cleanly and structurally, with more power than flat CSS allows. You can try Sass out in the [[http://lab.hamptoncatlin.com/play/with/sass|Sass playground]].
+
+** Liquid
+[[http://home.leetsoft.com/liquid][Liquid]]'s syntax and parse model are inspired by Django templates, as well as PHP's smarty
+
+** Markaby
+[[http://code.whytheluckystiff.net/markaby/][Markaby]] means Markup as Ruby
+
+** Remarkably
+[[http://rubyforge.org/projects/remarkably][Remarkably]] is a very tiny Markaby-like XML builder
+
+FIXME remarkably vs markaby?
+
+** Ezamar
+A simple homage to [[http://nitroproject.org][Nitro]]'s templating, is shipped together with Ramaze and used as the default template engine.
+
+** Nagoro
+
+The next generation of Ezamar and can be found at [[http://github.com/manveru/nagoro][github]] for the time being.
+
+** XSLT
+
+Feel free to add info.

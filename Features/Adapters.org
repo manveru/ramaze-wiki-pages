@@ -1,0 +1,78 @@
+* Ramaze/Adapters
+Ramaze takes advantage of the [[http://rack.rubyforge.org][Rack]] library to provide a common way to serve its content.
+
+** Thin
+
+[[http://code.macournoyer.com/thin/][Thin]] is a fast and simple HTTP server based on Mongrel and EventMachine. Read more on [[http://www.rubyinside.com/thin-a-ruby-http-daemon-thats-faster-than-mongrel-688.html][Ruby Inside]], or check out its [[http://groups.google.com/group/thin-ruby][google group]]
+
+{{{ ruby
+Ramaze.start :adapter => :thin
+}}}
+
+** Ebb
+
+Ebb aims to be a small and fast web server specifically for hosting dynamic Ruby language web applications. You can find more info at the [[http://groups.google.com/group/ebbebb][google group]]. The source code is hosted [[http://github.com/ry/ebb/tree/master][at github]].
+It is a binding to [[http://tinyclouds.org/libebb][libebb]].
+
+{{{ ruby
+Ramaze.start :adapter => :ebb
+}}}
+
+** Mongrel
+
+[[http://mongrel.rubyforge.org/][Mongrel]] is a fast HTTP library and server for Ruby that is intended for hosting Ruby web applications of any kind using plain HTTP rather than FastCGI or SCGI
+
+{{{ ruby
+Ramaze.start :adapter => :mongrel
+}}}
+
+** Swiftiply
+
+[[http://swiftiply.swiftcore.org][Swiftiply]] is a backend agnostic clustering proxy for web applications that is specifically designed to support HTTP traffic from web frameworks.
+Unlike [[http://siag.nu/pen/][Pen]], Swiftiply is not intended as a general purpose load balancer for tcp protocols and unlike [[http://haproxy.1wt.eu/][HAProxy]], it is not a highly configurable general purpose proxy overflowing with features.
+
+What it is, though, is a very fast, narrowly targetted clustering proxy.
+In back to back comparisons of Swiftiply to HAProxy, Swiftiply reliably outperforms HAProxy (tested using IOWA, Rails, Merb, and Ramaze backend processes running Mongrel).
+
+Swiftiply works differently from a traditional proxy.
+In Swiftiply, the backend processes are clients of the Swiftiply server -- they make persistent socket connections to Swiftiply.
+One of the major advantages to this architecture is that it allows one to start or stop backend processes at will, with no configuration of the proxy.
+The obvious disadvantage is that this is not behavior that backends typically expect.
+
+*** Swifiplied Mongrel
+
+{{{ ruby
+Ramaze.start :adapter => :swiftiplied_mongrel
+}}}
+
+*** Evented Mongrel
+
+[[http://swiftiply.swiftcore.org/mongrel.html][Evented Mongrel]] is a monkey-patch to Mongrel (available via the swiftiply gem) to use EventMachine's event-based network architecture instead of Mongrel's default threaded model.
+
+{{{ ruby
+Ramaze.start :adapter => :evented_mongrel
+}}}
+
+** WEBrick
+
+[[http://www.webrick.org/][WEBrick]] is a Ruby library program to build HTTP servers.
+
+{{{ ruby
+Ramaze.start :adapter => :webrick
+}}}
+
+** CGI
+
+CGI is the Common Gateway Interface and is one of the most basic ways to integrate into Webservers like Apache or Lighttpd.
+
+{{{ ruby
+Ramaze.start :adapter => :cgi
+}}}
+
+** FCGI
+
+Improvment of CGI as it doesn't start up a new connection to Ramaze on every request
+
+{{{ ruby
+Ramaze.start :adapter => :fcgi
+}}}

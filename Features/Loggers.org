@@ -1,0 +1,38 @@
+* Loggers
+
+Available loggers:
+
+  * LogHub
+  * Informer
+  * [[http://analogger.swiftcore.org/][Analogger]]
+  * Syslog
+  * [[http://lukeplant.me.uk/articles.php%3Fid%3D3][KNotify]]
+  * [[http://www.ignavus.net/software.html][XOSD (now defunct?)]]
+
+
+The default logger is the ''LogHub'' which supports all other loggers (including itself) and serves as a kind of redirection.
+The default logger within ''LogHub'' is the ''Informer'', which prints nicely colored logs to stdout.
+
+To simply store a copy of the logs in a file:
+
+{{{ ruby
+Ramaze::Log.loggers << Ramaze::Informer.new('inform.log')
+}}}
+
+For a faster, more flexible alternative, use the high performance [[http://analogger.swiftcore.org][Swiftcore Analogger]]
+
+{{{ ruby
+  Ramaze::Log.loggers = [Ramaze::Informer.new, Ramaze::Analogger.new('ramaze')]
+}}}
+
+To exchange the logger itself, just replace the ''Ramaze::Log'' constant:
+
+{{{ ruby
+  Ramaze::Log = Ramaze::Analogger.new('ramaze')
+  # or without warning
+  module Ramaze
+    remove_const :Log
+    Log = Analogger.new('ramaze')
+  end
+}}}
+

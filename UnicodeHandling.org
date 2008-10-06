@@ -1,0 +1,40 @@
+* Handling Unicode in Ramaze
+
+For the most part, handling non-ASCII text is not a Ramaze concern.
+It's important that you understand how Ruby handles string encodings and how HTTP and HTML handle them.
+
+In Ruby 1.8.6 the String class is quite naive about encodings.
+It is essentially just an array of bytes internally, so handling anything other than ASCII requires understanding and careful thought.
+If you simply accept strings entered by the user, store them somewhere (e.g. a database) and then show them back to your users without manipulating their contents then there's no problem.
+The bytes of your String go back out exactly as they came in and so everything works out fine.
+However for that to work you need to make sure that the user's web browser is sending and displaying strings in the same encoding.
+This can be achieved by setting a couple of important things in your HTML, and by setting HTTP headers.
+
+To setup your HTML to state that it is being output as UTF-8 and to ask the browser to send data as UTF-8:
+
+ * Add accept-charset="utf8" in your <form> tags, e.g.
+{{{ html
+<form action="/submit_details" method="POST" accept-charset="utf8">
+}}}
+
+ * Add a meta tag at the top of your <head> section for all pages (e.g. by putting it in your common page layout file):
+{{{ html
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  ...
+</head>
+}}}
+
+With Ruby 1.9 the String class is engineered as a sequence of characters and natively supports multiple string encodings.
+This means that you should be able to manipulate your strings successfully once they're into Ramaze.
+Still, you need to setup your website to ensure that browsers are told how to send and receive data, in the manner described above.
+
+With a little effort and understanding it's possible to successfully manipulate non-ASCII strings in Ruby 1.8.6 as well, but that's beyond the scope of this document.
+
+As well as setting indicators for string encodings in your HTML, you can set HTTP headers to reinforce your intent. Ramaze makes this easy - simply add the following in start.rb, before your call to Ramaze.start, to set the default headers that Ramaze sends back:
+{{{ ruby
+Ramaze::Global.content_type = 'text/html; charset=utf-8'
+Ramaze::Global.accept_charset = 'utf-8'
+}}}
+
+

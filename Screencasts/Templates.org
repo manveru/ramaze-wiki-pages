@@ -1,0 +1,3 @@
+* Screencast: Templates
+
+[[swf:ramaze-templates][title: Templates; width:646; height:480]]

@@ -1,0 +1,459 @@
+* A quick Ramaze walkthrough
+** Installing Ramaze
+
+See [[Download]]
+
+** Basics
+*** The Controller
+
+The basic building block of a Ramaze application is the Controller.
+A simple Ramaze app will usually contain one controller named MainController.
+
+{{{ ruby
+class MainController < Ramaze::Controller
+end
+}}}
+
+By default, MainController maps to `/`. You can create additional controllers that map to other urls.
+
+{{{ ruby
+class AnotherController < Ramaze::Controller
+  map '/another'
+end
+}}}
+
+*** Actions and Helpers
+
+Methods defined inside controllers are of two types:
+
+ * public methods are known as actions (these are accessible via the web)
+ * private methods are known as helpers (for functionality commonly used via actions and templates)
+
+**** Actions
+
+The `index` action is called by default when no other URL is provided.
+Below, accessing http://localhost:7000 invokes this `index` method and the return value, "Hello World" is rendered to the browser.
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def index
+    # http://localhost:7000
+    "Hello, World!"
+  end
+end
+}}}
+
+Controllers can be mounted onto different urls with the `map` directive.
+A mapped controller will only respond to requests that are prefixed with the supplied mapping.
+Below, http://localhost:7000/another/hello will invoke `AnotherController`'s method `hello`.
+
+{{{ ruby
+class AnotherController < Ramaze::Controller
+  map '/another'
+
+  def hello
+    # http://localhost:7000/another/hello
+    "Hello Another"
+  end
+end
+}}}
+
+Your action methods can accept arguments in two ways- get/post variables and via the url.
+For example, if you accessed `http://localhost:7000/add/A/B?number=one`
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def add(first, second)
+    # http://localhost:7000/add/A/B?number=one
+
+    # request.get? == true
+    # first == 'A'
+    # second == 'B'
+    # request['number'] == 'one'
+  end
+end
+}}}
+
+Default values for method params, like with `def add first, second, third = "C"`, will work as expected.
+
+Finally, use two underscores instead of a forward slash, or define_method for actions that contain a period or slash
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def admin__setup
+    # http://localhost:7000/admin/setup
+  end
+
+  define_method 'style.css' do
+    # http://localhost:7000/style.css
+  end
+
+  define_method 'admin/app.js' do
+    # http://localhost:7000/admin/app.js
+  end
+end
+}}}
+
+**** Helpers
+
+Private helper methods can be defined in the controller and reused by different actions and templates.
+
+{{{ ruby
+class AnotherController < Ramaze::Controller
+  map '/another'
+
+  def hello
+    greeting
+  end
+
+  def goodbye
+    greeting 'Goodbye'
+  end
+
+  private
+
+  def greeting(g='Hello')
+    "#{g}, World!"
+  end
+end
+}}}
+
+The private method `greeting` above cannot be accessed via the web.
+
+Ramaze includes a number of default and optional helpers, including a [[Features/Helpers#session-flash][session]], [[Features/Helpers#aspect][aspect]] (to run code before or after actions) and [[Features/Helpers#cache][caching]] helper. For more information, refer to the [[Features/Helpers]] page.
+
+*** Templates
+
+Ramaze supports both inline and external templates. The value returned by an action method is run through the templating engine of your choice. By default, controllers use the bundled Ezamar templating engine.
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def index
+    %q(
+        <?r @str = "abc" ?>
+        @str is #{@str}
+      )
+  end
+end
+}}}
+
+To simply render the returned value instead, use the `None` template engine.
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  engine :None
+
+  def index
+    'Hello world. This is not evaluated: <?r @str = "abc" ?> #@str'
+  end
+end
+}}}
+
+Ramaze includes support for a variety of templating engines, including [[Features/Templates#haml][Haml]], [[Features/Templates#erubis][Erubis]], [[Features/Templates#liquid][Liquid]] and [[Features/Templates#markaby][Markaby]]. For a full list and more information on using external templates, check the [[Features/Templates]] page.
+
+*** Layouts
+
+To wrap your actions in a layout, simply create an inline or external template that uses `@content` and set it as a layout in your controller.
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def index
+    'Hi there!'
+  end
+
+  def layout
+    %q( <html> #{@content} </html> )
+  end
+
+  # apply to all actions
+  layout :layout
+
+  # apply to all actions except index
+  layout :layout
+  deny_layout :index
+
+  # apply only to index
+  layout :layout => [ :index ]
+end
+}}}
+
+*** Routing
+
+Ramaze support simple routing using string, regex and lambda based routers.
+Routes are stored in a dictionary, which supports hash-like access but
+preserves order, so routes are evaluated in the order they are added.
+
+String routers are the simplest way to route in Ramaze. One path is
+translated into another:
+
+{{{ ruby
+  Ramaze::Route[ '/foo' ] = '/bar'
+
+  #  '/foo'  =>  '/bar'
+}}}
+
+Regex routers allow matching against paths using regex. Matches within
+your regex using () are substituted in the new path using printf-like
+syntax.
+
+{{{ ruby
+  Ramaze::Route[ %r!^/(\d+)\.te?xt$! ] = "/text/%d"
+
+  #  '/123.txt'  =>  '/text/123'
+  #  '/789.text' =>  '/text/789'
+}}}
+
+For more complex routing, lambda routers can be used. Lambda routers are
+passed in the current path and request object, and must return either a new
+path string, or nil.
+
+{{{ ruby
+  Ramaze::Route[ 'name of route' ] = lambda{ |path, request|
+    '/bar' if path == '/foo' and request[:bar] == '1'
+  }
+
+  #  '/foo'        =>  '/foo'
+  #  '/foo?bar=1'  =>  '/bar'
+}}}
+
+Lambda routers can also use this alternative syntax:
+
+{{{ ruby
+  Ramaze::Route('name of route') do |path, request|
+    '/bar' if path == '/foo' and request[:bar] == '1'
+  end
+}}}
+
+*** Error Handling
+
+Errors raised in your actions are caught by the Ramaze dispatcher and sent to an `error` action in your controller.
+ If an `error` action or template does not exist, the default Ramaze::Controller `error` action is used instead, and the error message and backtrace are rendered to the browser.
+
+Use your own custom error handler as follows:
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def error
+    @error = Ramaze::Dispatcher::Error.current
+    %(
+      <h1>Error: #{@error.message}</h1>
+      <div>
+        #{@error.backtrace.join('<br/>')}
+      </div>
+    )
+  end
+end
+}}}
+
+You can also configure what error action is used based on the exception raised:
+
+{{{ ruby
+Ramaze::Dispatcher::Error::HANDLE_ERROR[Og::Exception] = [ Ramaze::STATUS_CODE['Conflict'],
+                                                           '/ogerror' ]
+}}}
+
+In this case, any Og::Exception errors raised will return a HTTP status code 409 and render the `/ogerror` action to the browser.
+
+*** Running your app
+
+Running your Ramaze app is easy, just run ramaze start.rb, or create your own file and add a Ramaze.start to the end of the file and run that.
+
+Ramaze can accept a number of options to configure what adapter to use, what port to run on, etc.
+There are [[http://source.ramaze.net/#/lib/ramaze/global.rb][various configuration options]] available, and [[faq#how-do-i-set-ramaze-options][several ways to set them]].
+The most common way is to provide these options to `Ramaze.start` as follows:
+
+{{{ ruby
+require 'rubygems'
+require 'ramaze'
+
+class MainController < Ramaze::Controller
+  def index(); 'hello, world!!'; end
+end
+
+Ramaze.start :adapter => :mongrel, :port => 7000
+}}}
+
+{{{
+$ ruby file.rb
+INFO   Starting up Ramaze (Version 0.2.1)
+DEBUG  mapped Controllers: {"/"=>MainController}
+INFO   Adapter: Ramaze::Adapter::Mongrel, testing connection to 0.0.0.0:7000..7000
+INFO   and we are running: 0.0.0.0:7000..7000
+}}}
+
+Ramaze includes support for several adapters, including [[Features/Adapters#mongrel][Mongrel]], [[Features/Adapters#evented-mongrel][Evented Mongrel]] and [[Features/Adapters#fcgi][FastCGI]]. Read more on the [[Features/Adapters][Adapters]] page.
+
+For Nginx and Apache deployment recipes, check out the [[Deployment]] page.
+
+** Examples
+
+A few more examples to get you started. These and many others are available at [[http://github.com/manveru/ramaze/tree/master/examples/][the repo]]. There is also an [[http://github.com/manveru/ramaze/tree/master/doc/tutorial/todolist.html][introductory tutorial]] that accompanies the [[http://github.com/manveru/ramaze/tree/master/examples/todolist/][todolist example]].
+
+The best way to view [[http://source.ramaze.net/#/examples][these examples]], and browse around the ramaze source code is via the [[http://source.ramaze.net/#/examples/sourceview/sourceview.rb][Ramaze source code browser]]
+
+There is also a lot of applications hosted on github:
+  * [[http://github.com/Pistos/linistrac][LinisTrac]] is a clean and simple issue tracker
+  * [[http://github.com/exploid/blog][Minimalistic blog]]
+  * [[http://github.com/exploid/paginator][Pagination and Sorting by Headers Example]]
+  * [[http://github.com/rgrove/thoth][Thoth]] is an awesome Ruby blog engine
+  * [[http://github.com/manveru/sociar][Sociar]] is an open source social networking platform
+  * [[http://github.com/zh/tamanegi][Tamanegi]] is a RSS/Atom feeds aggregator. Using Sequel for ORM.
+  * [[http://github.com/zh/turl][TinyURL in Ramaze]]
+
+*** hello.rb
+{{{ ruby
+require 'ramaze'
+
+# you can access it now with http://localhost:7000/
+# This should output
+# Hello, World!
+# in your browser
+
+class MainController < Ramaze::Controller
+  def index
+    "Hello, World!"
+  end
+end
+
+Ramaze.start
+}}}
+
+*** simple.rb
+{{{ ruby
+require 'ramaze'
+
+# A very simple little application, you can simply run it and
+# point your browser to http://localhost:7000
+# you can change the port by setting
+# Ramaze::Global.port = 80 or Ramaze.start :port => 80
+# this most likely requires root-privileges though.
+
+# This example shows following (requests to the mentioned base-url) :
+# - simple text-output from the controller    [ / ]
+# - showing you what your request looked like [ /simple ]
+# - joining two strings                       [ /join/string1/string2 ]
+# - join arbitary strings                     [ /join_all/string1/string2/string3 ... ]
+# - sum two numbers                           [ /sum/1/3 ]
+# - show if you made a POST or GET request    [ /post_or_get ]
+# - How to map your controllers to urls       [ /other ]
+# - Also try out the error-page, just pass something odd ;)
+
+class SimpleController < Ramaze::Controller
+  map '/'
+
+  def index
+    "simple"
+  end
+
+  def simple
+    request.inspect
+  end
+
+  def join(first, second)
+    [first, second].join
+  end
+
+  def join_all(*strings)
+    strings.join
+  end
+
+  def sum(first, second)
+    first.to_i + second.to_i
+  end
+
+  def post_or_get
+    request.post? ? 'POST' : 'GET'
+  end
+end
+
+class OtherController < Ramaze::Controller
+  map '/other'
+
+  def index
+    "Hello, World from #{self.class.name}"
+  end
+end
+
+Ramaze.start
+}}}
+
+*** element.rb
+
+{{{ ruby
+require 'ramaze'
+
+class Page < Ezamar::Element
+  def render
+    %{
+    <html>
+      <head>
+        <title>examples/element</title>
+      </head>
+      <body>
+        <h1>#{@title}</h1>
+        #{content}
+      </body>
+    </html>
+    }
+  end
+end
+
+class SideBar < Ezamar::Element
+  def render
+    %{
+    <div class="sidebar">
+      <a href="http://something.com">something</a>
+    </div>
+    }
+  end
+end
+
+class MainController < Ramaze::Controller
+  map '/'
+
+  def index
+    %{
+    <Page title="Test">
+      <SideBar />
+      <p>
+        Hello, World!
+      </p>
+    </Page>
+    }
+  end
+end
+
+Ramaze.start
+}}}
+
+*** layout.rb
+
+{{{ ruby
+require 'ramaze'
+
+class MainController < Ramaze::Controller
+  map '/'
+  layout :page
+
+  def index
+    @title = "Test"
+    "<p>Hello, World!</p>"
+  end
+
+  def page
+    %{
+    <html>
+      <head>
+        <title>examples/layout</title>
+      </head>
+      <body>
+        <h1>#@title</h1>
+        #@content
+      </body>
+    </html>
+    }
+  end
+end
+
+Ramaze.start
+}}}

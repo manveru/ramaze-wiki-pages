@@ -1,0 +1,268 @@
+* Deploying your Ramaze app
+
+Once your app is [[Walkthrough#running-your-app][up and running]], you'll want to deploy it in a [[AdvancedDeployment][production environment]].
+Ramaze has no special `production mode` -- to turn off source reloading and hide public-facing error messages:
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  def error() 'An error has occurred, try again later' end
+end
+
+Ramaze.start :sourcereload => false
+}}}
+
+** Mongrel
+
+The recommended way of deploying a Ramaze app is using either [[Features/Adapters#mongrel][Mongrel]] or [[Features/Adapters#evented-mongrel][Evented Mongrel]] behind an Apache or Nginx proxy.
+
+** Apache
+{{{ apache
+NameVirtualHost *:80
+<VirtualHost *:80>
+  ServerName yourdomain.com
+  ServerAlias www.yourdomain.com
+
+  ServerAdmin admin@yourdomain.com
+
+  ErrorLog /var/log/apache2/yourdomain.com.errors
+  CustomLog /var/log/apache2/yourdomain.com.log custom
+
+  DefaultType text/html
+
+  ProxyPreserveHost On
+
+  # Configuration possibility 1 of 2:
+    # The entire domainname, from the root (/), is served by Ramaze
+    # Ramaze should be running at the defined host (192.168.1.100 in this example)
+    # and on the specified port (8000 in this example)
+    # Note the trailing slash after the port.
+    ProxyPass        / http://192.168.1.100:8000/
+    ProxyPassReverse / http://192.168.1.100:8000/
+  # End Configuration possibility 1 of 2.
+
+  # Configuration possibility 2 of 2:
+    # Or, if you like, only some subdirectory
+    # Note the lack of trailing slash after the port.
+    ProxyPass        /some-sub-dir http://192.168.1.100:8001
+    ProxyPassReverse /some-sub-dir http://192.168.1.100:8001
+
+    # This line will make it serve things from the DocumentRoot
+    # Unless stuff from some-sub-dir is requested
+    ProxyPass / !
+    DocumentRoot "/var/www/localhost/htdocs/stuff"
+    <Directory "/var/www/localhost/htdocs/stuff">
+      AllowOverride All
+      Options -Indexes FollowSymLinks MultiViews ExecCGI
+      Order Allow,Deny
+      Allow from All
+    </Directory>
+  # End Configuration possibility 2 of 2.
+</VirtualHost>
+}}}
+
+** Nginx
+{{{ ruby
+server {
+  server_name source.ramaze.net;
+
+  access_log /var/log/nginx/ramaze.sourceview.access_log main;
+  error_log  /var/log/nginx/ramaze.sourceview.error_log;
+
+  root /home/ramaze/ramaze/examples/sourceview/public;
+
+  location / {
+    if (-f $request_filename) {
+      access_log off;
+      rewrite_log off;
+      expires 30d;
+      break;
+    }
+
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+
+    if (!-f $request_filename) {
+      proxy_pass http://localhost:9950;
+      break;
+    }
+  }
+}
+}}}
+
+** LigHTTPD
+
+In your `lighttpd.conf`, you'll have to enable/include `mod_proxy` by adding it to the `server.modules` list, so we can later use it to forward requests to our Ramaze app, like so:
+
+{{{ apache
+server.modules = ( "mod_proxy" )
+}}}
+
+(Please note that usually the list contains more than just one `mod_*` entry.)
+
+Secondly, you'll need to add a rule to invoke the proxy. In this example, I'm looking for requests using a particular domain name, "example.com". I recommend putting this snippet to the very end of `lighttpd.conf`, but it's up to you, really.
+
+{{{ ruby
+#### proxy module
+
+$HTTP["host"] =~ "example\.com" {
+    proxy.server  = ( "" => (( "host" => "127.0.0.1", "port" => 7000 )) )
+}
+}}}
+
+If you have more than one app, which are supposed to be served under different (sub)domains, you would just add more rules:
+
+{{{ ruby
+#### proxy module
+
+$HTTP["host"] =~ "awesome\.example\.com" {
+    proxy.server  = ( "" => (( "host" => "127.0.0.1", "port" => 7000 )) )
+}
+
+$HTTP["host"] =~ "great\.example\.com" {
+    proxy.server  = ( "" => (( "host" => "127.0.0.1", "port" => 7001 )) )
+}
+}}}
+
+For more details on `mod_proxy`, see the [[http://trac.lighttpd.net/trac/wiki/Docs%3AModProxy][docs on the lighttpd site]].
+
+Here's a slightly advanced setup that lets lighttpd serve your application's static files (for the sake of this example located in `./public/css/`, `./public/images` and `./public/js`), while forwarding any other request to your application.
+
+This is a win-win situation: lighttpd can do what it does best (serving static files), and your Ramaze app can fully concentrate on dealing with the actual dynamic requests.
+
+{{{ apache
+$HTTP["host"] =~ "example\.com" {
+    # This is the path to your Ramaze app's /public/ folder
+    server.document-root = "/home/example_user/myramazeapp/public/"
+
+    $HTTP["url"] !~ "^/(css|images|js)" {
+        proxy.server  = ( "" => (( "host" => "127.0.0.1", "port" => 7000 )) )
+    }
+}
+}}}
+
+Another plus: you can employ other lighttpd mechanics for your static files, for example output compression using [[http://trac.lighttpd.net/trac/wiki/Docs%3AModCompress][mod_compress]].
+
+** CGI / FastCGI
+
+Most shared hosting servers use FastCGI. To deploy your Ramaze app in these environments, use the `fcgi` adapter.
+
+Create the following files in your application.  Choose either dispatch.cgi or dispatch.fcgi, depending on your needs and what you server makes available to you.
+
+**Note:** In order for these scripts to run both script itself and the public directory the script is running in need to be executable, log dir needs to be writeable etc.
+{{{
+chmod 755 public public/dispatch.fcgi
+}}}
+
+*** public/dispatch.fcgi
+
+{{{ ruby
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'ramaze'
+
+# FCGI doesn't like writing to stdout
+Ramaze::Inform.loggers = [ Ramaze::Informer.new( File.join(__DIR__, '..', 'log', 'ramaze.fcgi.log') ) ]
+
+Ramaze::Global.adapter = :fcgi
+
+$0 = File.join(__DIR__, '..', 'start.rb')
+
+require $0
+}}}
+
+If you want common code shared between start.rb and dispatch.fcgi, but require different settings, one method is:
+
+{{{ ruby
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'ramaze'
+
+# FCGI doesn't like writing to stdout
+Ramaze::Inform.loggers = [ Ramaze::Informer.new( File.join(__DIR__, '..', 'log', 'ramaze.fcgi.log') ) ]
+
+Ramaze::APPDIR.replace __DIR__/'..'
+
+Ramaze::Global.setup do |g|
+  g.template_root = __DIR__/'..'/:view
+  g.public_root = __DIR__
+  g.adapter = :fcgi
+  # other settings here
+  # g.sourcereload = false
+end
+
+require '../start_common.rb'
+
+Ramaze.start
+}}}
+
+*** public/dispatch.cgi
+
+{{{ ruby
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'ramaze'
+
+Ramaze::Global.adapter = :cgi
+Ramaze::Inform.loggers = [ Ramaze::Informer.new( File.join(__DIR__, '..', 'log', 'ramaze.cgi.log') ) ]
+
+$0 = File.join(File.dirname(__FILE__), '..', 'start.rb')
+
+require $0
+}}}
+
+*** .htaccess
+
+{{{ apache
+# General Apache options
+Options +FollowSymLinks +ExecCGI
+AddHandler cgi-script cgi rb
+<IfModule mod_fastcgi.c>
+ AddHandler fastcgi-script fcgi
+</IfModule>
+<IfModule mod_fcgid.c>
+ AddHandler fcgid-script fcgi
+</IfModule>
+
+# Redirect all requests not available on the filesystem
+# to Ramaze. By default the cgi dispatcher is used which
+# is very slow. For better performance replace the
+# dispatcher with the fastcgi one
+
+RewriteEngine On
+RewriteRule ^$ index.html [QSA]
+RewriteRule ^([^.]+)$ $1.html [QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
+
+# In case Ramaze experiences terminal errors.
+# Instead of displaying this message you can supply a
+# file here which will be rendered instead.
+#
+# Example:
+#   ErrorDocument 500 /500.html
+
+ErrorDocument 500 "<h2>Application error</h2>Ramaze failed to start properly"
+}}}
+
+*** Apache virtual host config
+
+(the placement of these lines depends on your flavour and distribution of UNIX/Linux)
+
+{{{ apache
+Listen 127.0.0.1:7001
+
+<VirtualHost 127.0.0.1:7001>
+  ServerAdmin webmaster@yourdomain.com
+  DocumentRoot /path/to/you/ramaze/application/public
+  ServerName ramazetest.yourdomain.com
+  ServerAlias ramazetest
+  AddDefaultCharset utf-8
+  ErrorLog /var/log/apache2/ramazetest_error.log
+  TransferLog /var/log/apache2/ramazetest_access.log
+</VirtualHost>
+}}}
+
+For more configuration options, check out the [[http://www.fastcgi.com/mod_fastcgi/docs/mod_fastcgi.html#FastCgiExternalServer][FastCgi Apache documentation]]

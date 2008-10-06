@@ -1,0 +1,185 @@
+* Advanced Deployment Scenarios
+** Overview
+
+Below are two general deployment implementations. The first is a very
+minimal setup that may be deployed on single box or with the front and
+back ends on separate boxes. It inherently lacks redundancy and
+scalability.
+
+The second example is on the other end of the deployment spectrum and
+employs redundancy and is extremely scalable. It could possibly be
+deployed across eight boxes.
+
+
+{{{
+[client] ----> [Front-end] ---- [Back-end]
+}}}
+
+{{{
+                                                            /--[Back-end 1A]
+                                         /--[Front-end 2]--+
+               +-------------------+    /                   \--[Back-end 2A]
+               | [Load Balancer 1] |   /
+[client] ----> |(fail-over w/ CARP)|--+
+               | [Load Balancer 2] |   \
+               +-------------------+    \                   /--[Back-end 1B]
+                                         \--[Front-end 1]--+
+                                                            \--[Back-end 2B]
+}}}
+
+** Front-End
+
+First, you need a front-end (FE) that will accept connections from
+clients or load balancers and will reverse-proxy (RP) to the back-end
+(BE). A FE can be in the form of a web server or some other kind of
+software.
+
+*** Front-End Software
+ * OpenBSD's native pf/relayd layer 3/7 proxy/load balancer
+ * HAProxy
+ * pen
+ * pound
+ * Apache (mod_cgi, mod_fastcgi, mod_proxy/mod_proxy_http)
+ * nginx (ngx_http_proxy_module)
+ * lighttpd (mod_proxy, mod_fastcgi, mod_scgi)
+
+In the case that the RP is a web server, it can also efficiently serve
+static content for the BE applications. Also, some RP FEs don't
+support SSL, which may be an important factor in your deployment
+decision.
+
+*** Front & Back-End Communication Protocol
+
+Second, you need to decide which protocol will connect the FE and BE.
+Depending on which RP you choose, you may not have many choices.
+Basically there are SCGI, FastCGI, and HTTP. HTTP seems to be the most
+popular today. There are many pros and cons to each, and their
+stability and performance will vary depending on your deployment,
+implementation and underlying OS. Depending on the protocol, the
+communication medium may use sockets or TCP.
+
+
+** Back-End
+
+Third, you need to choose a BE that will accept requests from the FE
+via the chosen protocol. The BE consists of the Ramaze application and
+the Ramaze FE interface. Ramaze utilizes Rack, which is a modular
+communication interface that easily adapts to HTTP servers, such as
+Mongrel and Webrick. Rack's SCGI interface could also be used in lieu
+of an HTTP server handler. Rack can natively speak LSWS, CGI, SCGI,
+FastCGI, mongrel, and webrick. Ramaze, must also support these
+handlers, and does, except for LSWS.
+
+
+*** Back-End Software
+ * rack-mongrel
+ * rack-evented_mongrel
+ * rack-swiftiplied_mongrel
+ * rack-webrick
+ * rack-cgi
+ * rack-scgi
+ * style/rack-scgi
+ * rack-fastcgi
+ * spawn-fcgi/rack-fastcgi
+ * thin
+
+
+To handle concurrency, a TCP/socket server can launch and monitor
+multiple instances of the ramaze app. Here are a couple of examples:
+
+{{{
+bash thin start --servers 4 --socket /tmp/thin-socket -R start.ru
+}}}
+
+Thin will initialize four instances of the ramaze app and communicate
+with the FE RP via the four sockets, /tmp/thin-socket*. nginx can
+communicate with the BE using HTTP over sockets. Lighttpd doesn't
+support this, but can use SCGI over sockets.
+
+{{{ bash
+ramaze --adapter mongrel --port 3000 &
+ramaze --adapter mongrel --port 3001 &
+}}}
+
+This manually starts two instances of the ramaze app in the
+background. The FE will talk to the ramaze app via mongrel using HTTP
+on ports 3000 and 3001.
+
+It is also important to note that both of these examples do not
+monitor the ramaze instances, only launch them. It would be trivial to
+create a wrapper script that would launch and monitor multiple
+instances. The wrapper script could for example restart crashed
+instances and log errors.
+
+** Conclusion
+
+There are a multitude of deployment configurations when examining the
+possible options from the FE to the BE. This is where a some
+experimentation may be beneficial before launching a production
+system. However, you may get more help in the Ramze Google Group and
+Freenode channel if you deploy a "standard" configuration.
+
+** Deployment Examples
+
+{{{
+                      /- rack-webrick/ramaze
+pf/relayd  --[HTTP]--+
+                      \- rack-webrick/ramaze
+}}}
+
+BEs may be started with a wrapper script. The BEs must also serve
+static content. Does not support SSL. [[http://www.openbsd.org/cgi-bin/man.cgi%3Fquery%3Dpf][pf]] and [[http://www.openbsd.org/cgi-bin/man.cgi%3Fquery%3Drelayd][relayd]] and are native of
+[[http://www.openbsd.org/][OpenBSD]].
+
+{{{
+                                          /- ramaze(port 3000)
+lighttpd/mod_proxy --[HTTP/TCP]-- thin --+-- ramaze(port 3001)
+                                          \- ramaze(port 3002)
+}}}
+
+thin controls and reverse-proxies requests to the ramaze
+application. Start the BEs using `thin start <opts>`.
+
+{{{
+                                /- rack-mongrel/ramaze(port 3000)
+nginx/http_proxy --[HTTP/TCP]--+
+                                \- rack-mongrel/ramaze(port 3001)
+}}}
+
+This is the most recommended configuration.
+
+{{{
+                                            /- ramaze(socket 1)
+nginx/http_proxy --[HTTP/sockets]-- thin --+
+                                            \- ramaze(socket 2)
+}}}
+
+FE and BE must run on same machine. I haven't found sockets to be
+faster than TCP on my [[http://www.openbsd.org/][OpenBSD]] machines.
+
+{{{
+lighttpd/mod_scgi --[SCGI/TCP]-- rack-scgi/ramaze
+}}}
+
+Extremely simple and minimal configuration, but does not scale.
+
+{{{
+                                          /- rack-scgi/ramaze
+lighttpd/mod_scgi --[SCGI/TCP]-- style --+
+                                          \- rack-scgi/ramaze
+}}}
+
+See ruby-style gem (Supervised TCPServer, Yielding Listeners
+Easily). STYLE can dynamically monitor the BE and re-spawn crashed ramaze
+instances.
+
+{{{
+                                        /- dispatch.fcgi/rack-fcgi/ramaze
+lighttpd/mod_fastcgi --[FCGI/sockets]--+
+                                        \- dispatch.fcgi/rack-fcgi/ramaze
+}}}
+
+lighttpd will spawn the BEs dynamically. In my experience, not very
+stable with high concurrency. The FE and BEs need to run as same user
+(no security). Also, FE and BE must be on the same box. Simple and
+easy to deploy.

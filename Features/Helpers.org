@@ -1,0 +1,175 @@
+* Features/Helpers
+** Default Helpers
+*** CGI
+Shortcuts for escaping and unescaping strings for the web.
+
+*** File
+Helps you serving files from your Controller in a fast way.
+
+*** Link
+    Provides easy ways to construct links to invoke your application's Controllers and Actions. The methods R and Rs construct hrefs to your controller actions. Rs is a shortcut version of R that assumes you mean the current controller, rather than specifying it as the first argument.
+
+{{{ ruby
+R(AdminController, :users) # => /admin/users
+Rs(:main) #=> /foo/main (if current controller is mapped to /foo)
+}}}
+
+You can also create full link tags with A:
+
+{{{ ruby
+A('text')                       #=> <a href="/text">text</a>
+A('foo/bar')                    #=> <a href="/foo/bar">foo/bar</a>
+A('text', :href => '/foo?x=y')  #=> <a href="/foo?x=y">text</a>
+A('Home', :href => Rs(:/))      #=> <a href="/foo/bar">Home</a>
+}}}
+
+*** Redirect
+    Easy redirection
+
+*** Session/Flash
+Store data on the session for the current and next request only. This is usually used to display temporary messages to the user after a redirect. In many cases it's considered good practice to redirect after a successful form POST, so the flash mechanism allows you to show the user a success message on the page they are redirected to.
+{{{ ruby
+# Go to / and a message is set, before redirecting to /welcome, which
+# displays the message. Refresh /welcome and the message will disappear
+# because flash data only lives for 1 extra request.
+class MainController < Ramaze::Controller
+  def index
+    flash[:message] = 'Hello'
+    redirect Rs('welcome')
+  end
+
+  def welcome
+    "#{flash[:message]}"
+  end
+end
+}}}
+
+** Optional Helpers
+*** Aspect
+    Allows you to wrap different Actions on your Controller with code
+
+*** Auth
+
+Simple way to add basic authentication. Check out the [[http://source.ramaze.net/#/examples/auth/auth.rb][auth example]] for an implementation using a database. The [[http://source.ramaze.net/#/examples/simple_auth.rb][simple http auth]] example is another approach to authentication, for =.htaccess= style logins.
+
+*** Cache
+
+Easy caching of actions and values.
+Note that if there is flash data on the user's session, action caching is ignored for that request, because it is assumed that the flash data is intended to be used in the response.
+ This feature can be turned off by setting Ramaze::Global.no_cache_flash = false.
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  helper :cache
+
+  def time
+    'Time of first access was: ' + (cache[:time] ||= Time.now)
+  end
+
+  def index
+    "Hi world, it's #{Time.now} right now"
+  end
+  # cache output of index action
+  cache :index
+
+  def name
+    'your name is ' + request['name']
+  end
+  # cache output of name for every unique name
+  cache :name, :key => lambda{ request['name'] }
+
+  def value
+    'hi'
+  end
+  # cache for 60 seconds
+  cache :value, :ttl => 60
+end
+}}}
+
+*** Identity
+
+    For ease of use of the OpenID authentication mechanism
+
+*** Inform
+
+    Wrapping the functionality of Ramazes logging facilities
+
+*** Markaby
+
+    Allows you to use Markaby in your Controller without having it as the default templating engine
+
+*** NitroForm
+
+    Hooks up on Nitro's form builder to help you creating forms from Og objects
+
+*** OpenID
+
+    Authentication via OpenID made easy
+
+*** Pager
+
+    Displays a collection of entitities in multiple pages
+
+*** Partial
+
+{{{ ruby
+class MyController
+  def index
+  end
+  def list
+    plain = request['plain']
+    "Hello World from List!  Plain List == #{plain}"
+  end
+end
+}}}
+
+{{{ html
+<html>
+  <head><title>Partial Render Index</title></head>
+  <body>
+    #{render_partial(Rs(:list), 'plain' => true)}
+  </body>
+</html>
+}}}
+
+Note that you can't use symbol keys for the options hash; they have to be string keys.
+
+*** Stack
+
+Allows you to use a call/answer mechanism for things like redirection to the site from which a user entered login form data
+
+** Custom Helpers
+
+Ramaze makes it easy to write your own helpers, simply create a ''helper'' subdirectory in your app. For example, you could create an emoticon helper in ''helper/emoticon.rb''
+
+{{{ ruby
+module Ramaze
+  module Helper
+    module Emoticon
+      def emoticonize text
+        text.gsub('=)', '<img src="/smiley.jpg" />')
+      end
+    end
+  end
+end
+}}}
+
+To use the helper in your controller and templates:
+
+{{{ ruby
+class MainController < Ramaze::Controller
+  helper :emoticon
+
+  def index
+    emoticonize 'hello world, =)'
+  end
+end
+}}}
+
+Or, to make the helper available to all the controllers in your app:
+
+{{{ ruby
+class Ramaze::Controller
+  helper :emoticon
+end
+}}}

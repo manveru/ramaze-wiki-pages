@@ -1,0 +1,48 @@
+* Ramaze Principles
+** KISS (Keep It Super Simple)
+Ramaze doesn't introduce any major change of paradigm for everyone
+familiar with Ruby and the basics of Web development.
+
+** POLS (Principle of Least Surprise)
+Ramaze is intuitive and easy to learn. Most functionality is built in
+a way that helps, not in a way that obfuscates or confuses.
+
+** Modular design
+Use what you want and how you want to.  Ramaze lets you use one of the
+most powerful programming languages available, Ruby, giving you full
+control over your system.  Even the most essential parts of Ramaze can
+easily be replaced or modified without losing the advantage of the
+whole framework.
+
+** Minimal dependencies
+Ramaze has two dependencies: Ruby itself, and [[http://rack.rubyforge.org][Rack]]. Most features are
+integrated in a very modular style that only require you to install
+the third-party packages that you really use.
+
+** Documentation
+Everything is documented: classes, modules, methods, configuration.
+Through extensive documentation Ramaze gives the developer easy access
+to a solid understanding of the underlying concepts and functionality.
+
+** Open development
+Everyone is welcome to contribute to Ramaze, and it's very easy to do
+so.  The repository is open for patches which pass the test suite.
+Once you have supplied some good patches, you will get free access to
+the developer repository.
+
+For more information about the Ramaze darcs repository and how to get
+involved, read [[Contributing]].
+
+** Examples
+Everyone learns differently: some only read the source, others browse
+documentation; but everyone loves examples for a quick and painless
+start.  Ramaze addresses this need and offers a wide variety of
+[[Walkthrough#examples][examples]] of usage, basic functionality, project layout and more
+advanced applications.
+
+** Fully BDD (Behaviour Driven Design)
+Ramaze has a very complete set of test "specifications" written in
+[[http://chneukirchen.org/repos/bacon][Bacon]]. These specs define the way Ramaze ought to behave.  The specs
+are checked every time a new patch is pushed into the repository, and
+are used to ensure the patch is valid and doesn't break the framework.
+Ramaze had [[http://darcs.riffraff.info/ramaze-coverage/][91.3% coverage]] as of a recent audit.

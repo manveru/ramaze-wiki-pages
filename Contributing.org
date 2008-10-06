@@ -1,0 +1,64 @@
+* Contributing to Ramaze
+** Using Git
+
+Ramaze uses the [[http://git.or.cz/][Git]] version control system. For more information about Git, its features and installation instructions, check out the [[http://www.kernel.org/pub/software/scm/git/docs/user-manual.html][Git User Manual]] or one of the following:
+
+  * [[http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html][Git Tutorial]]
+  * [[http://www.sourcemage.org/Git_Guide][Git Guide]]
+  * [[http://www-cs-students.stanford.edu/~blynn/gitmagic/][Git Magic]]
+  * [[http://www.gitcasts.com/][GitCasts]]
+  * [[http://www.kernel.org/pub/software/scm/git/docs/everyday.html][Everyday Git]]
+  * [[http://tomayko.com/writings/the-thing-about-git][The Thing about Git]]
+
+The Git repository for Ramaze is at [[http://github.com/manveru/ramaze/]].
+
+** Getting Ramaze
+
+To get the latest and greatest, just clone the remote repository:
+
+{{{
+git clone git://github.com/manveru/ramaze.git
+}}}
+
+After you've cloned the repo, you can update to the latest version by running this from inside your working copy of Ramaze:
+
+{{{
+git pull
+}}
+
+Alternatively, you can create your own fork on Ramaze on github.
+Go to  [[http://github.com/manveru/ramaze/tree/master][the Ramaze GitHub repository web page]] and click the 'fork' button.
+
+** Using the Repo Version
+
+To use your new Git version of Ramaze without having to ''rake install'' every time you ''git pull'', add a file to your Ruby installation's site_ruby directory named 'ramaze.rb':
+
+  $ cat /usr/lib/ruby/site_ruby/1.8/ramaze.rb
+  require 'rubygems'
+  require '/where/you/git/pulled/ramaze/lib/ramaze'
+
+Then use this in all your code:
+
+{{{ ruby
+  require 'ramaze'
+}}}
+
+Also see the excellent article from Christian Neukirchen about [[http://chneukirchen.org/blog/archive/2008/08/taming-rubylib-with-the-z-shell.html][taming $RUBYLIB with the Z shell]] for a even nicer way of handling this.
+
+** Making a Patch
+
+First, make sure your working directory is up to date to avoid conflicts:
+
+  $ git pull
+
+Now create patches against the remote repo:
+
+  $ git format-patch origin/HEAD
+
+From here you can either use ''git-send-email'' or you can tar up the patches and send them manually:
+
+  $ tar -cjf patch_name.tar.bz2 *.patch
+
+Email your patches to [[http://groups.google.com/group/ramaze][ramaze@googlegroups.com]] (you'll need to join the group first), or throw them at manveru on [[irc://chat.freenode.net/ramaze][IRC]].
+
+If you have created a fork on GitHub, ''git push'' back to your fork, and then submit a pull request.
