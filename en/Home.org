@@ -106,7 +106,3 @@ Ramaze.start
   * [[http://brainspl.at/articles/2007/11/07/merb-0-4-0-released-with-new-site-merbivore-com][Merb 0.4]] [[http://yehudakatz.com/2007/11/06/merb-04-the-one-that-rocks/][released]] with a brand new site at [[http://merbivore.com][merbivore.com]] //on Nov 6 2007//
   * New [[http://www.xnot.org/sinatra/beginning.html][Sinatra]] web-framework //on Oct 22 2007//
   * Wisteria [[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/269482][announced]] //on Sep 18 2007//
-
-----------
-
-Only registered users may write new content or change existing content.  Please [[http://ramaze.net/home%3Fdo%3Dregister][register]].  :)
