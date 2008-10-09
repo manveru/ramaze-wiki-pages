@@ -7,7 +7,7 @@ Otherwise, the return value of the action is run through the templating engine a
 Templates are merely files that are used to produce output.
 By default ramaze looks for a template of the same name as the action in the 'view/' directory.
 So, to use external templates, simply create a file with the name of the action in the 'view/' directory.
-By default, most template extensions follow the name of the Engine, so action => index, engine => haml == index.haml
+By default, most template extensions follow the name of the Engine, so `action => index`, `engine => haml` results in `index.haml`
 
 controllers/main.rb
 {{{ ruby
