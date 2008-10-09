@@ -18,8 +18,10 @@ class MainController < Ramaze::Controller
   end
 end
 }}}
+
 view/index.haml
-<code html>
+
+{{{ html
 !!!
 %html
   = @content
