@@ -1,6 +1,7 @@
 * Ramaze Features
 
 Ramaze is all about giving the developer freedom to use the right tools for the job, by emphasizing modularity and supporting a wide range of options.
+The following should give you some overview of the features inside Ramaze and how to use them.
 
  * [[Features/Adapters][Features - Adapters]]
  * [[Features/Helpers][Features - Helpers]]
