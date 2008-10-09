@@ -14,7 +14,7 @@ Ramaze is a simple, light and modular open-source web application framework writ
 {{{ ruby
 require 'ramaze'
 
-class MainController << Ramaze::Controller
+class MainController < Ramaze::Controller
   def index
     "Hello, World!"
   end

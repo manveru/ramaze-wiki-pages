@@ -20,7 +20,8 @@
 
  * [[http://groups.google.com/group/ramaze][Ramaze Google Group]]
  * [[http://rubyforge.org/pipermail/ramaze-general][Mailing List Archives]]
- * [[irc://chat.freenode.net/ramaze][#ramaze on irc.freenode.net]] (try [[http://java.freenode.net/%3Fchannel%3Dramaze][the freenode java applet]] or [[http://mibbit.com][mibbit.com]] if you don't have an IRC client yet)
+ * [[irc://chat.freenode.net/ramaze][#ramaze on irc.freenode.net]]
+ * [[http://embed.mibbit.com/%3Fserver%3Dirc.freenode.net&channel%3D%23ramaze%2C%23ruby-lang&forcePrompt%3Dtrue][Mibbit widget for #ramaze]], a [[http://java.freenode.net/%3Fchannel%3Dramaze][java applet]] or [[http://mibbit.com][mibbit.com]] if you don't have an [[http://en.wikipedia.org/wiki/List_of_IRC_clients][IRC client]] yet.
  * [[http://maps.google.com/maps%3Fq%3Dhttp:%2F%2Fdarcs.ramaze.net%2Framaze%2Fdoc%2Fmeta%2Fusers.kml][Ramaze users map]]
  * [[http://rubyforge.org/projects/ramaze][Rubyforge Project Page]]
  * [[http://en.wikipedia.org/wiki/Ramaze_(web_framework)][Wikipedia Page (deleted?)]]

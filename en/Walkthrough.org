@@ -259,7 +259,7 @@ In this case, any Og::Exception errors raised will return a HTTP status code 409
 Running your Ramaze app is easy, just run ramaze start.rb, or create your own file and add a Ramaze.start to the end of the file and run that.
 
 Ramaze can accept a number of options to configure what adapter to use, what port to run on, etc.
-There are [[http://source.ramaze.net/#/lib/ramaze/global.rb][various configuration options]] available, and [[faq#how-do-i-set-ramaze-options][several ways to set them]].
+There are [[http://source.ramaze.net/#/lib/ramaze/global.rb][various configuration options]] available, and [[FAQ#how-do-i-set-ramaze-options][several ways to set them]].
 The most common way is to provide these options to `Ramaze.start` as follows:
 
 {{{ ruby
