@@ -61,12 +61,10 @@ Ramaze.start
   * [[http://ramaze.rubyforge.org/rdoc][RDocs]]
 
 ** Recent Patches
-
-[[rss:http://github.com/feeds/manveru/commits/ramaze/master]]
+[[feed:http://github.com/feeds/manveru/commits/ramaze/master]]
 
 ** Recent Google Group Posts
-
-[[rss:http://groups.google.com/group/ramaze/feed/rss_v2_0_msgs.xml]]
+[[feed:http://groups.google.com/group/ramaze/feed/rss_v2_0_msgs.xml]]
 
 ** Other Frameworks
 
