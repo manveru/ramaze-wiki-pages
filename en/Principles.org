@@ -5,7 +5,7 @@ familiar with Ruby and the basics of Web development.
 
 ** POLS (Principle of Least Surprise)
 Ramaze is intuitive and easy to learn. Most functionality is built in
-a way that helps, not in a way that obfuscates or confuses.
+
 
 ** Modular design
 Use what you want and how you want to.  Ramaze lets you use one of the
