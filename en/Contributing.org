@@ -24,7 +24,7 @@ After you've cloned the repo, you can update to the latest version by running th
 
 {{{
 git pull
-}}
+}}}
 
 Alternatively, you can create your own fork on Ramaze on github.
 Go to  [[http://github.com/manveru/ramaze/tree/master][the Ramaze GitHub repository web page]] and click the 'fork' button.
