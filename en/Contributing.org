@@ -34,15 +34,15 @@ Go to  [[http://github.com/manveru/ramaze/tree/master][the Ramaze GitHub reposit
 To use your new Git version of Ramaze without having to ''rake install'' every time you ''git pull'', add a file to your Ruby installation's site_ruby directory named 'ramaze.rb':
 
 {{{
-  $ cat /usr/lib/ruby/site_ruby/1.8/ramaze.rb
-  require 'rubygems'
-  require '/where/you/git/pulled/ramaze/lib/ramaze'
+$ cat /usr/lib/ruby/site_ruby/1.8/ramaze.rb
+require 'rubygems'
+require '/where/you/git/pulled/ramaze/lib/ramaze'
 }}}
 
 Then use this in all your code:
 
 {{{ ruby
-  require 'ramaze'
+require 'ramaze'
 }}}
 
 Also see the excellent article from Christian Neukirchen about [[http://chneukirchen.org/blog/archive/2008/08/taming-rubylib-with-the-z-shell.html][taming $RUBYLIB with the Z shell]] for a even nicer way of handling this.
