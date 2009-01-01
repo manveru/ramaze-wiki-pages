@@ -5,7 +5,7 @@ Ramaze ist ein einfaches, leichtgewichtiges und modulares open-source framework 
 | Einfach lernen      | Gleich Loslegen                     | Mithelfen                                              |
 |---------------------+-------------------------------------+--------------------------------------------------------|
 | [[Screencasts]]     | [[Download]]                        | [[http://java.freenode.net/%3Fchannel%3Dramaze][Chat]] |
-| [[Features]]        | [[Erste Schritte]]                  | [[http://groups.google.com/group/ramaze][Discuss]]     |
+| [[Features]]        | [[Walkthrough][Erste Schritte]]     | [[http://groups.google.com/group/ramaze][Discuss]]     |
 | [[Geschwindigkeit]] | [[Walkthrough#examples][Beispiele]] | [[Contributing][Contribute]]                           |
 | [[Prinzipien]]      | [[Tutorials]]                       | [[Promote]]                                            |
 | [[Dokumentation]]   | [[Deployment]]                      |                                                        |
