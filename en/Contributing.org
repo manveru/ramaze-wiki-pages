@@ -10,7 +10,7 @@ Ramaze uses the [[http://git.or.cz/][Git]] version control system. For more info
   * [[http://www.kernel.org/pub/software/scm/git/docs/everyday.html][Everyday Git]]
   * [[http://tomayko.com/writings/the-thing-about-git][The Thing about Git]]
 
-The Git repository for Ramaze is at http://github.com/manveru/ramaze/.
+The Git repository for Ramaze is at [[http://github.com/manveru/ramaze/][Github]].
 
 ** Getting Ramaze
 
