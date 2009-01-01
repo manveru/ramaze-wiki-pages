@@ -7,7 +7,7 @@ Ramaze is a simple, light and modular open-source web application framework writ
 | [[Features]]      | [[Walkthrough]] | [[http://groups.google.com/group/ramaze][Discuss]]      |
 | [[Benchmarks]]    | [[Walkthrough#examples][Examples]]    | [[Contributing][Contribute]]   |
 | [[Principles]]    | [[Tutorials]]   | [[Promote]]      |
-| [[Documentation]] | [[Deployment]]  |              |
+| [[Documentation]] | [[Deployment]]  | [[Innate][Next generation]]  |
 
 ** Hello World Example
 
