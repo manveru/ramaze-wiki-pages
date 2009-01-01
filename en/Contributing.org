@@ -10,7 +10,7 @@ Ramaze uses the [[http://git.or.cz/][Git]] version control system. For more info
   * [[http://www.kernel.org/pub/software/scm/git/docs/everyday.html][Everyday Git]]
   * [[http://tomayko.com/writings/the-thing-about-git][The Thing about Git]]
 
-The Git repository for Ramaze is at [[http://github.com/manveru/ramaze/]].
+The Git repository for Ramaze is at http://github.com/manveru/ramaze/.
 
 ** Getting Ramaze
 
@@ -33,9 +33,11 @@ Go to  [[http://github.com/manveru/ramaze/tree/master][the Ramaze GitHub reposit
 
 To use your new Git version of Ramaze without having to ''rake install'' every time you ''git pull'', add a file to your Ruby installation's site_ruby directory named 'ramaze.rb':
 
+{{{
   $ cat /usr/lib/ruby/site_ruby/1.8/ramaze.rb
   require 'rubygems'
   require '/where/you/git/pulled/ramaze/lib/ramaze'
+}}}
 
 Then use this in all your code:
 
