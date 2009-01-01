@@ -51,15 +51,21 @@ Also see the excellent article from Christian Neukirchen about [[http://chneukir
 
 First, make sure your working directory is up to date to avoid conflicts:
 
+{{{
   $ git pull
+}}}
 
 Now create patches against the remote repo:
 
+{{{
   $ git format-patch origin/HEAD
+}}}
 
 From here you can either use ''git-send-email'' or you can tar up the patches and send them manually:
 
+{{{
   $ tar -cjf patch_name.tar.bz2 *.patch
+}}}
 
 Email your patches to [[http://groups.google.com/group/ramaze][ramaze@googlegroups.com]] (you'll need to join the group first), or throw them at manveru on [[irc://chat.freenode.net/ramaze][IRC]].
 
