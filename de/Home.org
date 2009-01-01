@@ -1,32 +1,30 @@
 * Ramaze
 
-Deutsche version
+Ramaze ist ein einfaches, leichtgewichtiges und modulares open-source framework für Web-Applikationen basierend auf Ruby.
 
-Ramaze is a simple, light and modular open-source web application framework written in Ruby.
+| Einfach lernen      | Gleich Loslegen                     | Mithelfen                                              |
+|---------------------+-------------------------------------+--------------------------------------------------------|
+| [[Screencasts]]     | [[Download]]                        | [[http://java.freenode.net/%3Fchannel%3Dramaze][Chat]] |
+| [[Features]]        | [[Erste Schritte]]                  | [[http://groups.google.com/group/ramaze][Discuss]]     |
+| [[Geschwindigkeit]] | [[Walkthrough#examples][Beispiele]] | [[Contributing][Contribute]]                           |
+| [[Prinzipien]]      | [[Tutorials]]                       | [[Promote]]                                            |
+| [[Dokumentation]]   | [[Deployment]]                      |                                                        |
 
-| Learn More    | Get Started | Get Involved |
-|---------------+-------------+--------------|
-| Screencasts   | Download    | [[http://java.freenode.net/%3Fchannel%3Dramaze][Chat]]         |
-| Features      | Walkthrough | [[http://groups.google.com/group/ramaze][Discuss]]      |
-| Benchmarks    | [[Walkthrough#examples][Examples]]    | [[Contributing][Contribute]]   |
-| Principles    | Tutorials   | Promote      |
-| Documentation | Deployment  |              |
-
-** Hello World Example
+** Hallo Welt Beispiel
 
 {{{ ruby
 require 'ramaze'
 
 class MainController < Ramaze::Controller
   def index
-    "Hello, World!"
+    "Hallo Welt!"
   end
 end
 
 Ramaze.start
 }}}
 
-** News
+** Neuigkeiten bezüglich Ramaze
 
  * [[http://groups.google.com/group/ramaze/browse_thread/thread/e63812dfadfe5708/772733f51c4ded18%3Fshow_docid%3D772733f51c4ded18][Ramaze 2008.06 released]]
  * The Ramaze source repository has been [[http://github.com/manveru/ramaze/tree/master][moved to GitHub]] // on May 8 2008//
@@ -57,19 +55,19 @@ Ramaze.start
  * [[http://groups.google.com/group/ruby-talk-google/browse_frm/thread/5ea77819b3ee33db/f3e38db076c0a35d][0.1.3 released]] //on Jul 21 2007//
  * [[http://groups.google.com/group/ruby-talk-google/browse_frm/thread/88b9c50ee53a4f3b/12d0824cfabd1c0b][0.1.2 released]] //on Jun 17 2007//
 
-** Development
+** Entwicklung
 
   * [[http://github.com/manveru/ramaze][GitHub hosted repository]]
   * [[http://source.ramaze.net][Ramaze source browser]]
   * [[http://ramaze.rubyforge.org/rdoc][RDocs]]
 
-** Recent Patches
+** Neueste Änderungen
 feed:http://github.com/feeds/manveru/commits/ramaze/master
 
-** Recent Google Group Posts
+** Neuestes in der Mailingliste
 feed:http://groups.google.com/group/ramaze/feed/rss_v2_0_msgs.xml
 
-** Other Frameworks
+** Andere Frameworks
 
   * [[http://borges.rubyforge.org/][Borges]], continuations based ruby web-framework originally ported from SeaSide
   * [[http://camping.rubyforge.org/files/README.html][Camping]], _why's 4k micro-framework
@@ -93,7 +91,7 @@ feed:http://groups.google.com/group/ramaze/feed/rss_v2_0_msgs.xml
   * [[http://www.ntecs.de/projects/wee/doc/rdoc/][Wee]], a [[http://rubyforge.org/projects/wee][ruby]] [[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/128432][web-framework]] with support for [[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/131158][continuations]]
   * [[http://www.rubyonrails.org/][Ruby on Rails]]
 
-** Related News
+** Neuigkeiten im Ruby Web-Bereich
 
   * Antonio announces his new ruby web-framework [[http://antoniocangiano.com/2008/04/01/announcing-ruby-on-crack/][Ruby on Crack]] //on Apr 1 2008//
   * [[http://merbivore.com][Merb]] announces [[http://brainspl.at/articles/2008/03/05/merb-0-9-1-developer-release][0.9.1 developer release]] //on Mar 4 2008//
