@@ -1,0 +1,63 @@
+* About OrgMarkup
+
+** Links
+
+Internal Links follow the [[Wiki]] [[Wiki][Wiki Wiki]] style, also WikiWords work.
+
+** Lists
+
+ * Lists start with a `*` after one or more spaces from the beginning of a line.
+ * Nested lists are maybe not working correctly yet.
+
+** Headers
+
+{{{
+* h1
+** h2
+*** h3
+**** h4
+***** h5
+****** h6
+}}}
+
+** Code
+
+You can start a code block with `{{{` and end it with `}}}`, each on its own line. For code inside a line please use =`backticks`=.
+
+{{{
+This is a line of code
+}}}
+
+
+{{{ ruby
+puts "This is a line of Ruby code"
+}}}
+
+You may also use `c`, `delphi`, `html`, `ezamar`, `nitro_xhtml`, `plaintext`, `rhtml`, or `xml`
+
+** Text formatting
+
+/italic/ is `/italic/`
+*bold* is `*bold*`
+_underline_ is `_underline_`
++strikethrough+ is `+strikethrough+`
+~blockquote~ is `~blockquote~`
+=code= is `=code=`
+and `code` is =`code`=
+last, but not least, there's also `----` the horizontal rule
+
+----
+
+** Tables
+
+|--------------+-------------------------+----------------|
+| Name         | Telephone               | Room           |
+|--------------+-------------------------+----------------|
+| Mr. X        | 777-777                 | 42             |
+| Mrs. Y       | 888-888                 | 21             |
+| see?         | tables                  | are            |
+| easy         | enough                  | eh?            |
+|--------------+-------------------------+----------------|
+| you can even | use separating elements | but they won't |
+| show up      | in the                  | endresult.     |
+|--------------+-------------------------+----------------|
