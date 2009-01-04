@@ -293,8 +293,6 @@ The best way to view [[http://source.ramaze.net/#/examples][these examples]], an
 
 There is also a lot of applications hosted on github:
   * [[http://github.com/Pistos/linistrac][LinisTrac]] is a clean and simple issue tracker
-  * [[http://github.com/exploid/blog][Minimalistic blog]]
-  * [[http://github.com/exploid/paginator][Pagination and Sorting by Headers Example]]
   * [[http://github.com/rgrove/thoth][Thoth]] is an awesome Ruby blog engine
   * [[http://github.com/manveru/sociar][Sociar]] is an open source social networking platform
   * [[http://github.com/zh/tamanegi][Tamanegi]] is a RSS/Atom feeds aggregator. Using Sequel for ORM.
