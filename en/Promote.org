@@ -2,5 +2,5 @@
 Help promote Ramaze by telling others about your great experiences with it.
 You can also add your site to the list of [[SitesPoweredByRamaze][sites powered by Ramaze]].
 
-There are many Ramaze images and icons in the [[http://groups.google.com/group/ramaze/files%3Fgrid%3D1][file collection of the Ramaze Google group]].
+There are many Ramaze images and icons in the [[http://groups.google.com/group/ramaze/files?grid=1][file collection of the Ramaze Google group]].
 Pick whichever you like (or make your own!) to place on your website with a link back to [[http://ramaze.net][ramaze.net]].
