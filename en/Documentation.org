@@ -16,7 +16,7 @@
  * [[http://ramaze.rubyforge.org/rdoc][RDocs (out of date)]]
  * [[http://darcs.riffraff.info/ramaze-coverage/][old rcov coverage report]]
 
-===== Community =====
+** Community
 
  * [[http://groups.google.com/group/ramaze][Ramaze Google Group]]
  * [[http://rubyforge.org/pipermail/ramaze-general][Mailing List Archives]]
