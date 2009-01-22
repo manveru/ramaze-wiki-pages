@@ -13,6 +13,6 @@ Feel free to add your site to this page, also see about other options of [[Promo
  * [[http://st.purepistos.net][STCA]], a tactical space combat game
  * [[http://linis.purepistos.net/][LinisTrac]], a highly spam-resistant issue tracker
  * [[http://weez-int.com][Weez International Ltd.]]
- * [[http://getjotbot.com/][JotBot]], a revolutionary time/task logger
+ * [[http://getjotbot.com/][JotBot]], effortless time tracking done right
 
 ... and many more which are privately installed on company intranets!
