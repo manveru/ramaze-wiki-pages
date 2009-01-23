@@ -61,7 +61,7 @@ NameVirtualHost *:80
 }}}
 
 ** Nginx
-{{{ ruby
+{{{ text
 server {
   server_name source.ramaze.net;
 
