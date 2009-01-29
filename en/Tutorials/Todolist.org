@@ -52,7 +52,7 @@ Ramaze comes at the moment only with a simple wrapper of the YAML::Store.
 So we are going to base this on the tools available, you can just do the same
 with your ORM or database-library of choice.
 
-So first, create a `model/todolist.rb` for our application:
+So first, edit `model/init.rb` of our application:
 
 {{{ ruby
 require 'ramaze/store/default'
