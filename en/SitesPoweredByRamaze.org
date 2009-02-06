@@ -2,9 +2,11 @@
 
 Feel free to add your site to this page, also see about other options of [[Promote][promoting your application]].
 
+ * [[http://getjotbot.com/][JotBot]] - Effortless time tracking done right.
+ * [[http://freezy.co.uk/][Freezy]] - Give stuff away, get free stuff.
+ * [[http://sm.purepistos.net/][Selfmarks]] - Anti-social bookmarking for the technically endowed.
  * [[http://escaloop.com/][Escaloop]]
  * [[http://probull.fi][Probull]]
- * [[http://purepistos.net][purepistos.net]]
  * [[http://apps.facebook.com/spreadarumor][Rumors Facebook Application]]
  * [[http://weewar.purepistos.net/wwpa][Weewar Players Association]]
  * [[http://wonko.com/][wonko.com]]
@@ -12,8 +14,6 @@ Feel free to add your site to this page, also see about other options of [[Promo
  * [[http://st.purepistos.net][STCA]], a tactical space combat game
  * [[http://linis.purepistos.net/][LinisTrac]], a highly spam-resistant issue tracker
  * [[http://weez-int.com][Weez International Ltd.]]
- * [[http://getjotbot.com/][JotBot]] - Effortless time tracking done right.
- * [[http://freezy.co.uk/][Freezy]] - Give stuff away, get free stuff.
- * [[http://sm.purepistos.net/][Selfmarks]] - Anti-social bookmarking for the technically endowed.
+ * [[http://purepistos.net][purepistos.net]]
 
 ... and many more which are privately installed on company intranets!
