@@ -295,7 +295,7 @@ Jump into `view/index.xhtml` and do the following:
   <li>
     #{h title}: #{status} - [ #{toggle} ]
   </li>
-<?r end
+<?r end ?>
 }}}
 
 We added a new element here, `toggle`, the Controller should give us
