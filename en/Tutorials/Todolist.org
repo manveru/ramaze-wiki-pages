@@ -463,7 +463,7 @@ awful lot of sense being able to change the enclosing stuff in one place.
 
 So let's apply DRY here as well.
 
-Take a look at the `src/element/page.rb`
+Take a look at the `src/element/page.rb` If the file and/or directory does not exist you will need to create it. In which case you will also need to reference the it as so, `require 'src/element/page'`, which is often placed in the `start.rb` file.
 
 {{{ ruby
 class Page < Ezamar::Element
