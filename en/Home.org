@@ -23,36 +23,6 @@ end
 Ramaze.start
 }}}
 
-** News
-
- * [[http://groups.google.com/group/ramaze/browse_thread/thread/e63812dfadfe5708/772733f51c4ded18%3Fshow_docid%3D772733f51c4ded18][Ramaze 2008.06 released]]
- * The Ramaze source repository has been [[http://github.com/manveru/ramaze/tree/master][moved to GitHub]] // on May 8 2008//
- * Ramaze now [[http://darcs.ramaze.net/?r=ramaze;a=commit;h=20080503141144-cbc08-3938580de207fc33d4205a48a9fca50ac1ac88db.gz][runs on Rubinius]] //on May 3 2008//
- * [[http://dambalah.com/][Luc Castera]] gave a [[http://dambalah.com/2008/05/03/becamp-slides-ramaze/][presentation on Ramaze]] at [[http://barcamp.org/beCamp2008][Charlottesville beCamp]] //on May 2 2008//
- * [[http://wonko.com][Ryan Grove]] agreed, [[http://wonko.com/post/ramaze-is-beautiful][Ramaze is beautiful]]  //on April 29 2008//
- * Avdi Grimm featured Ramaze in [[http://avdi.org/devblog/2008/04/27/on-beauty-in-code/][On Beauty in Code]] //on April 28 2008//
- * Ramaze mentioned in Juixe's [[http://www.juixe.com/techknow/index.php/2008/04/14/ruby-web-frameworks/][Ruby Web Frameworks]] article //on April 14 2008//
- * Michael [[http://jaoo.dk/ruby-oslo-2008/file%3Fpath%3D/jaoo-ruby-oslo-2008/slides/ramaze.pdf][presented Ramaze]] at Ruby Fools 2008 //on April 3 2008//
- * Jeremy Evans [[http://groups.google.com/group/ramaze/browse_frm/thread/8a9da03f5ed4375f/8f68f7cb866021fa%3Flnk%3Dgst&q%3Dscaffolding#8f68f7cb866021fa][announced]] [[http://scaffolding-extensions.jeremyevans.net/][Scaffolding Extensions]] with support for Ramaze and Sequel //on Feb 11 2008//
- * Ramaze [[http://www.sapphiresteel.com/Ramaze-In-Ruby-In-Steel][tutorial for Ruby in Steel]] //on Feb 8 2008//
- * Ramaze mentioned in [[http://www.avnetlabs.com/web/whats-with-all-the-ruby-frameworks][What’s with all the ruby frameworks?]] //on Feb 6 2008//
- * [[http://wonko.com/][Ryan Grove]] announced [[http://thothblog.org/][Thoth]], a Ramaze powered blog //on Feb 2 2008//
- * [[http://groups.google.com/group/ramaze/browse_thread/thread/193a4374b46cbe30][Ramaze 0.3.5]] released //on Jan 27 2008//
- * Ramaze mentioned in [[http://rbazinet.wordpress.com/2008/01/14/10-alternative-ruby-web-frameworks][10 Alternative Ruby Web Frameworks]] //on Jan 14 2008//
- * [[http://groups.google.com/group/ramaze/browse_thread/thread/1e41fbdfe60c9f0e][0.3.0 released]] with support for Ruby 1.9.0 and switch to Bacon //on Jan 10 2008//
- * Ramaze [[http://antoniocangiano.com/2008/01/08/ramaze-a-ruby-framework-that-will-amaze/][featured on Zen and the Art of Ruby Programming]] //on Jan 8 2008//
- * Ramaze mentioned on [[http://www.smashingmagazine.com/2008/01/04/frameworks-round-up-when-to-use-how-to-choose/][Frameworks Round-Up: When to Use, How to Choose?]] //on Jan 1 2008//
- * Ramaze [[Benchmarks][runs on ruby 1.9]]! //on Jan 1 2008//
- * 0.2.1 released with various bug-fixes //on Nov 29 2007//
- * [[http://www.gemtacular.com/gems/ramaze][Ramaze on Gemtacular]] //on Nov 28 2007//
- * Ramaze [[http://www.rubyinside.com/ramaze-another-light-ruby-web-framework-but-with-mvc-658.html][featured on RubyInside]] //on Nov 22 2007//
- * darcs repo moved to [[http://darcs.ramaze.net/ramaze]] //on Nov 21 2007//
- * [[http://groups.google.com/group/ruby-talk-google/browse_thread/thread/945c2595c0a30c71][0.2.0 released]] //on Nov 20 2007//
- * Ramaze mentioned in [[http://www.infoq.com/news/2007/11/forgotten-ruby-web-frameworks][The Forgotten Ruby Web Frameworks]] //on Nov 6 2007//
- * Happy Birthday Ramaze! Ramaze turned 1 year old //on Oct 13 2007//
- * [[http://groups.google.com/group/ruby-talk-google/browse_frm/thread/ec2c7371412574ee/ec73f6508a4d0200][0.1.4 released]] //on Sep 6 2007//
- * [[http://groups.google.com/group/ruby-talk-google/browse_frm/thread/5ea77819b3ee33db/f3e38db076c0a35d][0.1.3 released]] //on Jul 21 2007//
- * [[http://groups.google.com/group/ruby-talk-google/browse_frm/thread/88b9c50ee53a4f3b/12d0824cfabd1c0b][0.1.2 released]] //on Jun 17 2007//
 
 ** Development
 
