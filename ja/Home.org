@@ -1,7 +1,7 @@
 * Ramaze
 Ramazeはシンプルで、軽くて、モジュラーなオープンソースのRuby用Webアプリケーションフレームワークです。
 
-| Learn More    | Get Started | Get Involved |
+| Ramazeって？| 使ってみる | 参加しよう |
 |---------------+-------------+--------------|
 | [[Screencasts]]   | [[Download]]    | [[http://java.freenode.net/?channel=ramaze][Chat]]         |
 | [[Features]]      | [[Walkthrough]] | [[http://groups.google.com/group/ramaze][Discuss]]      |
@@ -24,11 +24,11 @@ Ramaze.start
 }}}
 
 
-** 開発
+** 開発者向けリンク
 
-  * [[http://github.com/manveru/ramaze][GitHub hosted repository]]
-  * [[http://source.ramaze.net][Ramaze source browser]]
-  * [[http://ramaze.rubyforge.org/rdoc][RDocs]]
+  * [[http://github.com/manveru/ramaze][リポジトリ(GitHub)]]
+  * [[http://source.ramaze.net][ソースコードブラウザ]]
+  * [[http://ramaze.rubyforge.org/rdoc][ドキュメント(RDoc)]]
 
 ** 最近の更新
 [[feed:http://github.com/feeds/manveru/commits/ramaze/master]]
