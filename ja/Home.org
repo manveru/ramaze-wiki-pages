@@ -1,5 +1,5 @@
 * Ramaze
-Ramaze$B$O%7%s%W%k$G!"7Z$/$F!"%b%8%e%i!<$J%*!<%W%s%=!<%9$N(BRuby$BMQ(BWeb$B%"%W%j%1!<%7%g%s%U%l!<%`%o!<%/$G$9!#(B
+Ramazeはシンプルで、軽くて、モジュラーなオープンソースのRuby用Webアプリケーションフレームワークです。
 
 | Learn More    | Get Started | Get Involved |
 |---------------+-------------+--------------|
@@ -9,7 +9,7 @@ Ramaze$B$O%7%s%W%k$G!"7Z$/$F!"%b%8%e%i!<$J%*!<%W%s%=!<%9$N(BRuby$BMQ(BWeb$B
 | [[Principles]]    | [[Tutorials]]   | [[Promote]]      |
 | [[Documentation]] | [[Deployment]]  | [[Innate][Next generation]]  |
 
-** $BNc!'(BHello World
+** 例：Hello World
 
 {{{ ruby
 require 'ramaze'
@@ -24,19 +24,19 @@ Ramaze.start
 }}}
 
 
-** $B3+H/(B
+** 開発
 
   * [[http://github.com/manveru/ramaze][GitHub hosted repository]]
   * [[http://source.ramaze.net][Ramaze source browser]]
   * [[http://ramaze.rubyforge.org/rdoc][RDocs]]
 
-** $B:G6a$N99?7(B
+** 最近の更新
 [[feed:http://github.com/feeds/manveru/commits/ramaze/master]]
 
-** $B:G6a$N%a!<%j%s%0%j%9%H(B
+** 最近のメーリングリスト
 [[feed:http://groups.google.com/group/ramaze/feed/rss_v2_0_msgs.xml]]
 
-** $B$=$NB>$N%U%l!<%`%o!<%/(B
+** その他のフレームワーク
 
   * [[http://borges.rubyforge.org/][Borges]], continuations based ruby web-framework originally ported from SeaSide
   * [[http://camping.rubyforge.org/files/README.html][Camping]], _why's 4k micro-framework
@@ -60,7 +60,7 @@ Ramaze.start
   * [[http://www.ntecs.de/projects/wee/doc/rdoc/][Wee]], a [[http://rubyforge.org/projects/wee][ruby]] [[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/128432][web-framework]] with support for [[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/131158][continuations]]
   * [[http://www.rubyonrails.org/][Ruby on Rails]]
 
-** $B4XO"%K%e!<%9(B
+** 関連ニュース
 
   * Antonio announces his new ruby web-framework [[http://antoniocangiano.com/2008/04/01/announcing-ruby-on-crack/][Ruby on Crack]] //on Apr 1 2008//
   * [[http://merbivore.com][Merb]] announces [[http://brainspl.at/articles/2008/03/05/merb-0-9-1-developer-release][0.9.1 developer release]] //on Mar 4 2008//
