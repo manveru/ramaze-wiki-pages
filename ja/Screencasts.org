@@ -1,0 +1,8 @@
+* Ramazeのスクリーンキャスト
+これらは見て分かるやり方で，興味のある人にRamazeのことを教えるスクリーンキャストのシリーズです．RubyやWeb開発の専門的な技術を持っていないのならば，順番に見ることをお勧めします
+
+ * [[Screencasts/HelloWorld][Screencasts - Hello World]]
+ * [[Screencasts/ActionsAndParameters][Screencasts - アクションとパラメータ]]
+ * [[Screencasts/Templates][Screencasts - テンプレート]]
+ * [[Screencasts/Forms][Screencasts - フォーム]]
+ * [[Screencasts/Layouts][Screencasts - レイアウト]]

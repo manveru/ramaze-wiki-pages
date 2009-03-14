@@ -1,0 +1,5 @@
+* Ramazeの宣伝
+あなたの素晴らしい経験を紹介することによって，Ramazeの普及に協力をお願いします．
+[[SitesPoweredByRamaze][Ramazeで稼働しているサイト]]の一覧にあなたのサイトを加えることが出来ます.
+
+[[http://groups.google.com/group/ramaze/files?grid=1][Ramaze Google groupのファイルコレクション]]に多数のRamazeの画像とアイコンがあります．[[http://ramaze.net][ramaze.net]]へとリンクを張ってくれるのなら，あなたのWebサイトに置くため好きなものを選んで下さい(または専用のものを作って下さい)．
