@@ -76,7 +76,7 @@ There is no official issue tracking software in place.  A couple of probable rea
  * Any feature requests and actual bug reports just trickle into the mailing list or the IRC channel, and they are spec'ed and dealt with very quickly.  Sometimes the discoverer of the problem just creates and submits a patch, and sends it in.  Patches are usually accepted very quickly.
 
 Nevertheless, if you feel that you must use an issue tracker in lieu
-of the mailing list and IRC channel, then submit a new ticket [[http://rubyforge.org/tracker/%3Fgroup_id%3D3034][here]].
+of the mailing list and IRC channel, then submit a new ticket [[http://github.com/manveru/ramaze/issues][here]].
 
 ** Logging
 *** How do I print to the log?
