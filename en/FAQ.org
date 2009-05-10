@@ -40,17 +40,16 @@ http://mydomain.com/foo/bar.pdf. You can change the public path using
 
 ====== How do you pronounce Ramaze? ======
 
-There are two ways Ramaze is usually pronounced. The one that is most
-common at the moment is like the English 'amaze' with a prefixed 'r'.
+In English, the official pronunciation is like the English 'amaze' with a prefixed 'r'.
 
 [[wp:International%20Phonetic%20Alphabet][wp:International Phonetic Alphabet]] transcription:
   ɹʌˈmejz
 
-The other way is using a Japanese-like pronunciation.
+In non-English, an acceptable alternative is:
 
-  `ra` as in `rasta`
-  `ma` as in `mark`
-  `ze`, just make it sound German ;)
+  'ra' as in 'romp'
+  'ma' as in 'mark'
+  'ze' as in 'zest'
 
 or, using [[wp:International%20Phonetic%20Alphabet][wp:International Phonetic Alphabet]] transcription:
   ɹaˈmazɛ
