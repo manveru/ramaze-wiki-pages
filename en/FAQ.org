@@ -14,6 +14,17 @@ Solutions (choose one):
  - export RUBYOPT=-rrubygems
  - require 'rubygems'  # before require 'ramaze'
 
+** Can I run different Ramaze versions for different Ramaze applications?
+
+Certainly!  Just choose a specific gem version in your application, like this:
+
+{{{ ruby
+require 'rubygems'
+gem 'ramaze', '2009.03'
+require 'ramaze'
+}}}
+
+
 ** Why does Ramaze seem to have so many dependencies?
 
 Ramaze only has two gem dependencies:
