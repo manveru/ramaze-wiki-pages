@@ -34,11 +34,11 @@ See [[http://github.com/manveru/ramaze/tree/master/examples/app/upload][the file
 By default, Ramaze will attempt to serve any files found in the
 public/ directory of your application (relative to the file with
 Ramaze.start in it). For example, if you have a file
-public/foo/bar.pdf, you can download it by browsing to
-http://mydomain.com/foo/bar.pdf. You can change the public path using
-`Global.public_root = 'some/new/path'`
+<code>public/foo/bar.pdf</code>, you can download it by browsing to
+<code>http://mydomain.com/foo/bar.pdf</code>. You can change the public path using
+<code>Ramaze.options.public_root = 'some/new/path'</code>
 
-====== How do you pronounce Ramaze? ======
+** How do you pronounce Ramaze?
 
 In English, the official pronunciation is like the English 'amaze' with a prefixed 'r'.
 
