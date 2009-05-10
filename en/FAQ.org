@@ -181,4 +181,4 @@ Ramaze.options.adapter.port = 8080
 Ramaze.options.adapter.handler = :mongrel
 }}}
 
-See [[http://github.com/manveru/innate/blob/master/lib/innate/options.rb|options.rb]] and [[http://book.ramaze.net/#_configuration|Journey to Ramaze: Configuration]]
+See [[http://github.com/manveru/innate/blob/master/lib/innate/options.rb][options.rb]] and [[http://book.ramaze.net/#_configuration][Journey to Ramaze: Configuration]]
