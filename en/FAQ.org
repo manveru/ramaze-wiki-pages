@@ -1,4 +1,5 @@
 * Frequently Asked Questions
+
 ** no such file to load -- ramaze (LoadError)
 
 Problem symptom:
@@ -12,6 +13,15 @@ Solutions (choose one):
  - ruby -rrubygems start.rb
  - export RUBYOPT=-rrubygems
  - require 'rubygems'  # before require 'ramaze'
+
+** Why does Ramaze seem to have so many dependencies?
+
+Ramaze only has two gem dependencies:
+
+ - innate
+ - rack (needed by innate)
+
+If 'gem install ramaze' pulls more than that, it means you are using an old version of RubyGems which does not distinguish between development dependencies (which are optional) and required dependencies.  Those "so many" dependencies are only used for development and testing and are not actually required for end users using Ramaze.
 
 ** Why aren't my template files being used?
 
