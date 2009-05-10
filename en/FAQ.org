@@ -100,13 +100,17 @@ More info on [[http://rubyforge.org/pipermail/ramaze-general/2007-September/0000
 *** How do I save logs to file?
 
 {{{ ruby
+# Simple
+Ramaze::Log.loggers << Ramaze::Logger::Informer.new( 'ramaze.log' )
+
+# Advanced
   unless Ramaze::Log.loggers.size == 2
     logdir = __DIR__/:logs
     logfile = logdir/"ramaze_#{Time.now.strftime('%Y%m%d%H%M%S')}.log"
 
     FileUtils.mkdir_p(logdir)
     logger = Informer.new(logfile)
-    Ramaze::Log.loggers << Ramaze::Logging::Logger::Informer.new(logfile)
+    Ramaze::Log.loggers << Ramaze::Logger::Informer.new(logfile)
   end
 }}}
 
