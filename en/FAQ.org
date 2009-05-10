@@ -1,5 +1,5 @@
 * Frequently Asked Questions
-** no such file to load -- ramaze (LoadErro
+** no such file to load -- ramaze (LoadError)
 
 Problem symptom:
 
@@ -27,7 +27,7 @@ looking for templates. By default, this is the view/ subdirectory.
 
 ** How do I handle file uploads?
 
-See [[http://github.com/manveru/ramaze/tree/master/examples/upload][the file upload example]] in the examples directory.
+See [[http://github.com/manveru/ramaze/tree/master/examples/app/upload][the file upload example]] in the examples directory.
 
 ** How do I get Ramaze to serve static files?
 
