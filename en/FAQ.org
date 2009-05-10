@@ -89,6 +89,9 @@ There is no official issue tracking software in place.  A couple of probable rea
 Nevertheless, if you feel that you must use an issue tracker in lieu of the mailing list and IRC channel, then submit a new ticket [[http://github.com/manveru/ramaze/issues][here]].
 
 ** Logging
+
+Ramaze is using the Logger library of Ruby stdlib by default, but allows you to dispatch logging to multiple loggers at once as long as they respond to `#log(level, *messages)`.
+
 *** How do I print to the log?
 
 {{{ ruby
@@ -100,42 +103,82 @@ Ramaze::Log.info "some info message"
 *** How do I turn off DEBUG and INFO messages?
 
 {{{ ruby
-Ramaze::Log.ignored_tags = [:info, :debug]
+Ramaze::Log.level = Logger::WARN
 }}}
 
-More info on [[http://rubyforge.org/pipermail/ramaze-general/2007-September/000081.html][this mailing list thread]]. Or, to turn off all logging:
+The levels available, along with their precedence are:
 
 {{{ ruby
-  Ramaze::Log.loggers = []
+DEBUG < INFO < WARN < ERROR < FATAL < UNKNOWN
+}}}
+
+To turn off all logging:
+
+{{{ ruby
+  Ramaze::Log.loggers.clear
 }}}
 
 
 *** How do I save logs to file?
 
+Some of the capabilities from the Logger library allow you to do following:
+
 {{{ ruby
-# Simple
-Ramaze::Log.loggers << Ramaze::Logger::Informer.new( 'ramaze.log' )
+# 1. Create logger for stderr/stdout
+logger = Logger.new($stdout)
+logger = Logger.new($stderr)
 
-# Advanced
-  unless Ramaze::Log.loggers.size == 2
-    logdir = __DIR__/:logs
-    logfile = logdir/"ramaze_#{Time.now.strftime('%Y%m%d%H%M%S')}.log"
+# 2. Create logger for a file
+logger = Logger.new('test.log')
 
-    FileUtils.mkdir_p(logdir)
-    logger = Informer.new(logfile)
-    Ramaze::Log.loggers << Ramaze::Logger::Informer.new(logfile)
-  end
+# 3. Create logger for file object
+file = File.open('test.log', 'a+')
+logger = Logger.new(file)
+
+# 4. Create logger with rotation on specified file size
+
+# 10 files history, 5 MB each
+logger = Logger.new('test.log', 10, (5 << 20))
+
+# 100 files history, 1 MB each
+logger = Logger.new('test.log', 100, (1 << 20))
+
+# 5. Create a logger which ages logfiles daily/weekly/monthly
+
+logger = Logger.new('test.log', 'daily')
+logger = Logger.new('test.log', 'weekly')
+logger = Logger.new('test.log', 'monthly')
+}}}
+
+So, to simply log to $stderr and to a file, you can
+
+{{{ ruby
+stderr_logger = Logger.new($stderr)
+file_logger = Logger.new('ramaze.log')
+Ramaze::Log.loggers = [stderr_logger, file_logger]
+}}}
+
+A logger with log-rotation without output to $stderr (useful for FCGI) would look like this:
+
+{{{ ruby
+rotating_logger = Logger.new('ramaze.log', 'daily')
+Ramaze::Log.loggers = [rotating_logger]
 }}}
 
 
 ** How do I set Ramaze options?
 
-Via ''Ramaze.start'':
+Via `Ramaze.start`:
 
 {{{ ruby
-Ramaze.start :adapter => adapter
+Ramaze.start :adapter => :mongrel, :port => 8080
 }}}
 
-{{{ruby
-Ramaze.start :adapter => :mongrel, :sourcereload => false
+Via `Ramaze.options`:
+
+{{{ ruby
+Ramaze.options.adapter.port = 8080
+Ramaze.options.adapter.handler = :mongrel
 }}}
+
+See [[http://github.com/manveru/innate/blob/master/lib/innate/options.rb|options.rb]] and [[http://book.ramaze.net/#_configuration|Journey to Ramaze: Configuration]]
