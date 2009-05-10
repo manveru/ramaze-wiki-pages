@@ -78,12 +78,6 @@ Ramaze::Log.warn "some warning message"
 Ramaze::Log.info "some info message"
 }}}
 
-*** How do I enable DEV messages?
-
-{{{ ruby
-Ramaze::Log.loggers.each{|l| l.log_levels << :dev }
-}}
-
 *** How do I turn off DEBUG and INFO messages?
 
 {{{ ruby
@@ -114,23 +108,10 @@ Ramaze::Log.loggers << Ramaze::Logger::Informer.new( 'ramaze.log' )
   end
 }}}
 
-** How do I set an HTTP header?
-
-{{{ ruby
-  Ramaze::Dispatcher::Action::FILTER << proc {|response|
-    response.header['Cache-Control'] = 'no-store'
-  }
-}}}
 
 ** How do I set Ramaze options?
 
-Ramaze options can be set via the ''ramaze'' command line binary
-
-{{{ bash
-  ramaze start.rb -a adapter
-}}}
-
-or via ''Ramaze.start''
+Via ''Ramaze.start'':
 
 {{{ ruby
 Ramaze.start :adapter => adapter
@@ -138,18 +119,4 @@ Ramaze.start :adapter => adapter
 
 {{{ruby
 Ramaze.start :adapter => :mongrel, :sourcereload => false
-}}}
-
-or via the ''Global'' namespace
-
-{{{ ruby
-Ramaze::Global.adapter = adapter
-}}}
-
-or a ''Global.setup'' block
-
-{{{ruby
-Ramaze::Global.setup do |g|
-  g.adapter = adapter
-end
 }}}
