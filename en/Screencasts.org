@@ -7,4 +7,4 @@ It is recommended to watch them in order unless you have expertise in Ruby or we
  * [[Screencasts/ActionsAndParameters][Screencasts - Actions and Parameters]]
  * [[Screencasts/Templates][Screencasts - Templates]]
  * [[Screencasts/Forms][Screencasts - Forms]]
- * [[Screencasts/Layouts][Screencasts - Layouts]]
+ * [[Screencasts/Layouts][Screencasts - Layouts]] (deprecated as of 2009.05)
