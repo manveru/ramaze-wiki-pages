@@ -6,15 +6,17 @@ Feel free to add your site to this page, also see about other options of [[Promo
  * [[http://getjotbot.com/][JotBot]] - Effortless time tracking done right.
  * [[http://freezy.co.uk/][Freezy]] - Give stuff away, get free stuff.
  * [[http://sm.purepistos.net/][Selfmarks]] - Anti-social bookmarking for the technically endowed.
+ * [[http://ram.purepistos.net][Ramalytics]], web analytics software
  * [[http://escaloop.com/][Escaloop]]
  * [[http://probull.fi][Probull]]
  * [[http://apps.facebook.com/spreadarumor][Rumors Facebook Application]]
- * [[http://weewar.purepistos.net/wwpa][Weewar Players Association]]
  * [[http://wonko.com/][wonko.com]]
  * [[http://planet.zhekov.net/][Tamanegi]], rss/atom feeds aggregator
  * [[http://st.purepistos.net][STCA]], a tactical space combat game
  * [[http://linis.purepistos.net/][LinisTrac]], a highly spam-resistant issue tracker
  * [[http://weez-int.com][Weez International Ltd.]]
  * [[http://purepistos.net][purepistos.net]]
+ * [[http://fixnum.org/blog][fixnum.org]], a personal blog
+ * [[http://dvorak.purepistos.net][Dvorak Made Easy]], an online typing course
 
 ... and many more which are privately installed on company intranets!
