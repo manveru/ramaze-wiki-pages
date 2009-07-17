@@ -63,7 +63,9 @@ Ramaze.start in it). For example, if you have a file
 
 Use Rack to route particular exceptions to particular actions.  For example, to catch all exceptions and route them to the error action of your MainController:
 
-  Rack::RouteExceptions.route( Exception, MainController.r( :error ) )
+{{{ ruby
+Rack::RouteExceptions.route( Exception, MainController.r( :error ) )
+}}}
 
 ** How do you pronounce Ramaze?
 
