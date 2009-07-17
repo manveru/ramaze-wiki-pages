@@ -59,6 +59,12 @@ Ramaze.start in it). For example, if you have a file
 `http://mydomain.com/foo/bar.pdf`. You can change the public path using
 `Ramaze.options.public_root = 'some/new/path'`
 
+** How do I handle exceptions or errors, or set custom 404 pages?
+
+Use Rack to route particular exceptions to particular actions.  For example, to catch all exceptions and route them to the error action of your MainController:
+
+  Rack::RouteExceptions.route( Exception, MainController.r( :error ) )
+
 ** How do you pronounce Ramaze?
 
 In English, the official pronunciation is like the English 'amaze' with a prefixed 'r'.
