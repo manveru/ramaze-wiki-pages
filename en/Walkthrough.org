@@ -291,12 +291,17 @@ A few more examples to get you started. These and many others are available at [
 
 The best way to view [[http://source.ramaze.net/#/examples][these examples]], and browse around the ramaze source code is via the [[http://source.ramaze.net/#/examples/sourceview/sourceview.rb][Ramaze source code browser]]
 
-There is also a lot of applications hosted on github:
+There are also a lot of applications hosted on github:
   * [[http://github.com/Pistos/linistrac][LinisTrac]] is a clean and simple issue tracker
   * [[http://github.com/rgrove/thoth][Thoth]] is an awesome Ruby blog engine
   * [[http://github.com/manveru/sociar][Sociar]] is an open source social networking platform
   * [[http://github.com/zh/tamanegi][Tamanegi]] is a RSS/Atom feeds aggregator. Using Sequel for ORM.
   * [[http://github.com/zh/turl][TinyURL in Ramaze]]
+
+See also these Ramaze application skeletons/protos:
+
+  * [[http://github.com/nanodeath/ramastic/tree/master][Mr Bones skeleton]] with OpenID, jQuery, Blueprint, and more
+  * [[http://github.com/Pistos/ramaze-proto/tree/master][ramaze-proto]] using jQuery, M4DBI, PostgreSQL, OpenID
 
 *** hello.rb
 {{{ ruby
