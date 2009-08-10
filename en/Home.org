@@ -62,17 +62,3 @@ Ramaze.start
   * [[http://www.ntecs.de/projects/wee/doc/rdoc/][Wee]], a [[http://rubyforge.org/projects/wee][ruby]] [[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/128432][web-framework]] with support for [[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/131158][continuations]]
   * [[http://www.rubyonrails.org/][Ruby on Rails]]
 
-** Related News
-
-  * Antonio announces his new ruby web-framework [[http://antoniocangiano.com/2008/04/01/announcing-ruby-on-crack/][Ruby on Crack]] //on Apr 1 2008//
-  * [[http://merbivore.com][Merb]] announces [[http://brainspl.at/articles/2008/03/05/merb-0-9-1-developer-release][0.9.1 developer release]] //on Mar 4 2008//
-  * [[http://ebb.rubyforge.org/][Ebb]] 0.0.1 released //on Feb 28 2008//
-  * [[http://www.ruby-forum.com/topic/138811][Ebb]] ruby web-server announced to be [[http://s3.amazonaws.com/four.livejournal/20080121/ebb.png][faster than emongrel and thin]] //on Jan 14 2008//
-  * [[http://code.macournoyer.com/thin/][Thin]] ruby web-server [[http://macournoyer.wordpress.com/2008/01/03/thin-a-fast-and-simple-web-server/][announced]] //on Jan 3 2008//
-  * [[http://brainspl.at/articles/2008/01/10/merb-0-5-0-is-out][Merb 0.5 released]] merb 0.5 is released
-  * [[http://www.rubyinside.com][RubyInside]] [[http://www.rubyinside.com/thin-a-ruby-http-daemon-thats-faster-than-mongrel-688.html][features]] [[http://code.macournoyer.com/thin/][Thin]], a fast ruby webserver based on mongrel and eventmachine //on Jan 5, 2008//
-  * [[http://brainspl.at/articles/2007/12/14/merb-0-4-2-released][Merb 0.4.2]] released //on Dec 14 2007//
-  * [[http://wuby.org][Wuby]], [[http://www.rubyinside.com/wuby-another-light-weight-web-framework-for-ruby-654.html][another light-weight web application framework]] announced //on Nov 19 2007//
-  * [[http://brainspl.at/articles/2007/11/07/merb-0-4-0-released-with-new-site-merbivore-com][Merb 0.4]] [[http://yehudakatz.com/2007/11/06/merb-04-the-one-that-rocks/][released]] with a brand new site at [[http://merbivore.com][merbivore.com]] //on Nov 6 2007//
-  * New [[http://www.xnot.org/sinatra/beginning.html][Sinatra]] web-framework //on Oct 22 2007//
-  * Wisteria [[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/269482][announced]] //on Sep 18 2007//
