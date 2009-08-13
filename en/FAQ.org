@@ -46,6 +46,14 @@ Make sure your template files have the right extension for the template engine y
 Also make sure you're putting them in the directory that Ramaze is
 looking for templates. By default, this is the view/ subdirectory.
 
+** How do use a different view for an action?
+
+Ramaze automatically uses a view file that matches the action method.  To use a different one, use respond in the method:
+
+{{{ ruby
+respond(render_view(:another_view))
+}}}
+
 ** How do I handle file uploads?
 
 See [[http://github.com/manveru/ramaze/tree/master/examples/app/upload][the file upload example]] in the examples directory.
