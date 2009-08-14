@@ -1,0 +1,6 @@
+* Promouvoir Ramaze
+Aidez &agrave; promouvoir Ramaze en faisant partager vos impressions.
+Vous pouvez aussi ajouter votre site &agrave; la [[SitesPoweredByRamaze][liste des sites construits avec Ramaze]].
+
+Il y a plusieurs images ou ic&ocirc;nes relatives &agrave; Ramaze dans les [[http://groups.google.com/group/ramaze/files?grid=1][fichiers du Google group Ramaze]].
+Choisissez-en une (ou faites la votre!) pour re-diriger les visiteurs de votre site sur [[http://ramaze.net][ramaze.net]].

@@ -1,0 +1,5 @@
+* Screencast: Actions et Param&egrave;tres
+
+Retour aux [[Screencasts]]
+
+[[swf:ramaze-action-parameters][title: Actions and Parameters; width:642; height:492]]

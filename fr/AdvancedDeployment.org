@@ -1,0 +1,182 @@
+* Scenarios de D&eacute;ploiement Avanc&eacute;s
+** Survol
+
+Voici deux exemples d&#x27;impl&eacute;mentation. Le premier repr&eacute;sente une configuration
+minimale qui peut &ecirc;tre impl&eacute;ment&eacute;e d&#x27;un bloc ou avec un frontend et backend
+s&eacute;par&eacute;s. Par d&eacute;finition, ce n&#x27;est pas une solution ad&eacute;quat pour un projet amen&eacute;
+&agrave; s&#x27;&eacute;largir.
+
+Le deuxi&egrave;me exemple est au contraire extr&ecirc;mement &eacute;volutif de par sa redondance.
+Il peut se diviser en huit blocs.
+
+
+{{{
+[client] ----> [Front-end] ---- [Back-end]
+}}}
+
+{{{
+                                                            /--[Back-end 1A]
+                                         /--[Front-end 2]--+
+               +-------------------+    /                   \--[Back-end 2A]
+               | [Load Balancer 1] |   /
+[client] ----> |(fail-over w/ CARP)|--+
+               | [Load Balancer 2] |   \
+               +-------------------+    \                   /--[Back-end 1B]
+                                         \--[Front-end 1]--+
+                                                            \--[Back-end 2B]
+}}}
+
+** Front-End
+
+Premi&egrave;rement, vous avez besoin d&#x27;un front-end (FE) qui va prendre en 
+charge les requ&ecirc;tes client (navigateurs) ou celles d&#x27;un r&eacute;partiteur de
+charge et d&eacute;l&eacute;guera celles-ci aux back-ends (BE). Ce que l&#x27;on appelle
+reverse-proxy (RP). Le front-end peut se pr&eacute;senter sous la forme d&#x27;un
+web-server ou tout autre type de logiciel.
+
+*** Quelques Front-Ends
+ * OpenBSD's native pf/relayd layer 3/7 proxy/load balancer
+ * HAProxy
+ * pen
+ * pound
+ * Apache (mod_cgi, mod_fastcgi, mod_proxy/mod_proxy_http)
+ * nginx (ngx_http_proxy_module)
+ * lighttpd (mod_proxy, mod_fastcgi, mod_scgi)
+
+Dans le cas d&#x27;un web-server, il peut efficacement servir tout le contenu
+statique de l&#x27;application. Aussi certains front-end ne supportent pas SSL,
+ce qui peut &ecirc;tre important dans le choix de votre impl&eacute;mentation.
+
+*** Protocole entre Front-end et Back-end
+
+Ensuite, vous devez d&eacute;cider quel protocole va &ecirc;tre utiliser pour la communication
+entre front-end et back-end. Suivant le reverse-proxy utilis&eacute;, vous n&#x27;aurez pas &eacute;norm&eacute;ment
+le choix. En fait, il y a SCGI, FastCGI et HTTP. HTTP semble &ecirc;tre le plus
+populaire aujourd&#x27;hui. Il y a du pour et du contre dans chacun d&#x27;eux, et leur
+stabilit&eacute; ou performance d&eacute;pendra de votre sch&eacute;mas de d&eacute;ploiement, et aussi de l&#x27;OS.
+Suivant le protocole utilis&eacute;, la communication s&#x27;effectuera au travers d&#x27;un socket ou via TCP.
+
+** Back-End
+
+Enfin, il va falloir choisir un back-end qui acceptera les requ&ecirc;tes du
+front-end au travers de ce fameux protocole. Ramaze utilise Rack qui est une
+interface modulaire &agrave; un large panel de servers HTTP comme Mongrel ou Webrick.
+Rack SCGI peut aussi &ecirc;tre utilis&eacute; &agrave; la place. D&#x27;origine, Rack peut parler LSWS,
+CGI, SCGI, FastCGI, mongrel et webrick. Ramaze est donc adapt&eacute; &agrave; ces
+solutions, except&eacute; LSWS.
+
+*** Quelques Back-Ends
+ * rack-mongrel
+ * rack-evented_mongrel
+ * rack-swiftiplied_mongrel
+ * rack-webrick
+ * rack-cgi
+ * rack-scgi
+ * style/rack-scgi
+ * rack-fastcgi
+ * spawn-fcgi/rack-fastcgi
+ * thin
+
+
+Pour prendre en charge la concurrence des requ&ecirc;tes, un server TCP/socket
+peut lancer plusieurs instances d&#x27;une application Ramaze. Voici quelques
+exemples:
+
+{{{
+bash thin start --servers 4 --socket /tmp/thin-socket -R start.ru
+}}}
+
+Thin va d&eacute;marrer 4 instances de l&#x27;application Ramaze et communiquera avec
+le front-end &agrave; travers 4 sockets, /tmp/thin-socket*. NGINX prend en charge
+la communication par socket en HTTP. Lighttpd en revanche, utilise SCGI pour
+les sockets.
+
+{{{ bash
+ramaze --adapter mongrel --port 3000 &
+ramaze --adapter mongrel --port 3001 &
+}}}
+
+Cette commande lance 2 instances de l&#x27;application Ramaze en t&acirc;che de
+fond. Le front-end s&#x27;adressera &agrave; celle-ci via mongrel, en HTTP, &agrave; travers
+les ports 3000 et 3001.
+
+Il est important de noter que ces deux exemples ne permettent pas de
+visualiser l&#x27;&eacute;tat ou les actions de l&#x27;application. Nous n&#x27;avons fait que
+d&eacute;marrer celle-ci. Il est n&eacute;anmoins trivial de cr&eacute;er un script un peu
+plus complet qui pourrait par exemple red&eacute;marrer les instances &quot;crash&eacute;es&quot;,
+ou faire &eacute;tat des erreurs sur un fichier log.
+
+** Conclusion
+
+Il existe une multitude de configurations pour un d&eacute;ploiement lorsque l&#x27;on
+prend le temps d&#x27;examiner toutes les options possibles en terme de front-end
+ou de back-end. C&#x27;est pourquoi il est avantageux de faire des essais avant de
+se lancer une application en production. Quoi qu&#x27;il en soit, il est possible
+d&#x27;obtenir de l&#x27;aide sur le Ramaze Google Group ou sur le canal Freenode (#ramaze)
+si vous cherchez une configuration plus ou moins &quot;standard&quot;.
+
+** Exemples de D&eacute;ploiements
+
+{{{
+                      /- rack-webrick/ramaze
+pf/relayd  --[HTTP]--+
+                      \- rack-webrick/ramaze
+}}}
+
+Les back-ends peuvent &ecirc;tre d&eacute;marr&eacute;s par un script global et doivent servir
+le contenu statique. SSL n&#x27;est pas support&eacute;. [[http://www.openbsd.org/cgi-bin/man.cgi%3Fquery%3Dpf][pf]] et [[http://www.openbsd.org/cgi-bin/man.cgi%3Fquery%3Drelayd][relayd]] viennent de 
+[[http://www.openbsd.org/][OpenBSD]].
+
+{{{
+                                          /- ramaze(port 3000)
+lighttpd/mod_proxy --[HTTP/TCP]-- thin --+-- ramaze(port 3001)
+                                          \- ramaze(port 3002)
+}}}
+
+Thin contr&ocirc;le et prend en charge les requ&ecirc;tes par reverse-proxy destin&eacute;es
+&agrave; l&#x27;application Ramaze. D&eacute;marrez avec `thin start <opts>`.
+
+{{{
+                                /- rack-mongrel/ramaze(port 3000)
+nginx/http_proxy --[HTTP/TCP]--+
+                                \- rack-mongrel/ramaze(port 3001)
+}}}
+
+Cette configuration est la plus recommand&eacute;e:
+
+{{{
+                                            /- ramaze(socket 1)
+nginx/http_proxy --[HTTP/sockets]-- thin --+
+                                            \- ramaze(socket 2)
+}}}
+
+Front-end et Back-end doivent tourner sur la même machine.
+Je n'ai pas trouvé de socket plus rapide que TCP sur mon [[http://www.openbsd.org/][OpenBSD]].
+
+{{{
+lighttpd/mod_scgi --[SCGI/TCP]-- rack-scgi/ramaze
+}}}
+
+Extremement simple et minimal, mais pas &eacute;volutif.
+
+{{{
+                                          /- rack-scgi/ramaze
+lighttpd/mod_scgi --[SCGI/TCP]-- style --+
+                                          \- rack-scgi/ramaze
+}}}
+
+Voir Gem ruby-style (Supervised TCPServer, Yielding Listeners
+Easily). STYLE peut dynamiquement faire &eacute;tat de l&#x27;application et
+relancer les instances &quot;crash&eacute;es&quot;.
+
+{{{
+                                        /- dispatch.fcgi/rack-fcgi/ramaze
+lighttpd/mod_fastcgi --[FCGI/sockets]--+
+                                        \- dispatch.fcgi/rack-fcgi/ramaze
+}}}
+
+Lighttpd d&eacute;marrera le back-end dynamiquement. D&#x27;apr&egrave;s mon exp&eacute;rience,
+ce n&#x27;est pas une solution tr&egrave;s stable s&#x27;il y a beaucoup de requ&ecirc;tes
+concurentes. Front-end et Back-end doivent tourner avec le m&ecirc;me utilisateur
+(mauvais pour des raisons de s&eacute;curit&eacute;). Ils doivent aussi faire partie du
+m&ecirc;me bloc. Simple et facile &agrave; d&eacute;ployer.

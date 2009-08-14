@@ -1,0 +1,50 @@
+* Les Principes de Ramaze
+** KISS (Keep It Super Simple) : Toujours aller au plus simple
+Ramaze n&#x27;inclus pas de changement majeur au niveau des paradigmes pour 
+quiconque familier &agrave; Ruby et aux bases du developpement web. 
+
+** POLS (Principle of Least Surprise) : Principe de moindre surprise
+Ramaze est intuitif et facile &agrave; apprendre. La plupart des fonctionalit&eacute;es 
+sont embarqu&eacute;es.
+
+** Un design Modulaire
+Utilise ce que tu veux et comme tu veux.  Ramaze te permet d&#x27;utiliser 
+l&#x27;un des langages les plus puissant, Ruby, qui te donne acc&egrave;s &agrave; tout ton system.
+M&ecirc;me les parties les plus essentiels de Ramaze peuvent &ecirc;tre facilement
+remplac&eacute;es ou modifi&eacute;es sans rien perdre des avantages du framework lui-m&ecirc;me.
+
+** D&eacute;pendance minimum
+Ramaze n'a que 2 dependances en dehors de Ruby lui-m&ecirc;me, [[Innate]] qui 
+est le nouveau noyau de Ramaze et [[http://rack.rubyforge.org][Rack]]. 
+La plupart des dispositifs sont int&eacute;gr&eacute;s de façon tr&egrave;s modulaire qui
+ne requi&egrave;re que l&#x27;installation des tierces packages que vous voulez vraiment
+utiliser. 
+
+** Documentation
+Tout est document&eacute;: classes, modules, methodes, configuration.
+A travers une documentation sans-cesse grandissante, Ramaze donne
+aux d&eacute;veloppeurs l&#x27;acc&egrave;s facile &agrave; une solide compr&eacute;hension de ses
+concepts et fonctionalit&eacute;es. 
+
+** D&eacute;veloppement Open Source
+Tout le monde est le bienvenu pour contribuer au developpement de Ramaze, 
+et de mani&egrave;re facile. La boite de d&eacute;p&ocirc;t est ouverte aux patches qui 
+passent nos tests. Quand vous aurez propos&eacute; quelques patches utiles,
+vous obtiendrez un acc&egrave;s direct et gratuit &agrave; la boite de d&eacute;p&ocirc;t.
+
+Pour plus d'infos, lisez l'article: [[Contributing][Contribuer]].
+
+** Exemples
+Chacun apprend de fa&ccedil;on diff&eacute;rente: certains ne lisent que les fichiers source, 
+d&#x27;autres parcours la documentation; mais tout le monde aime les exemples
+pour commencer vite et sans peine. Ramaze dispose pour cela d&#x27;une grande vari&eacute;t&eacute;
+d'[[Walkthrough#examples][exemples]] pour un usage basic, ou plus avanc&eacute;.
+
+** Enti&egrave;rement BDD (Behaviour Driven Design)
+Ramaze poss&egrave;de un set tr&egrave;s complet de "sp&eacute;cifications" &eacute;crites en
+[[http://chneukirchen.org/repos/bacon][Bacon]]. Ces specs d&eacute;finissent la
+fa&ccedil;on dont Ramaze dois r&eacute;agir. Les specs sont test&eacute;es &agrave; chaque fois qu&#x27;un
+patch est propos&eacute;, ainsi nous pouvons v&eacute;rifier que le patch ne peut pas mettre 
+le framework en &eacute;chec. 
+ 
+Ramaze a couvert [[http://darcs.riffraff.info/ramaze-coverage/][91.3% des probl&egrave;mes]] lors d'un r&eacute;cent audit.

@@ -1,0 +1,5 @@
+* Screencast: Hello World
+
+Retour aux [[Screencasts]]
+
+[[swf:ramaze-hello-world][title:Ramaze Hello World; width:642; height:492]]
