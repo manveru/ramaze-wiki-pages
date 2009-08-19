@@ -1,7 +1,7 @@
-* T&eacute;l&eacute;charger Ramaze
+* Télécharger Ramaze
 
 Note: Pour les utilisateurs de Windows, vous pourriez en profiter pour installer le Gem win32console.
-Cela aura pour effet de satisfaire les messages d&#x27;avertissement g&eacute;n&eacute;r&eacute;s par Ramaze, et d&#x27;afficher de jolies couleurs quand vous d&eacute;marrerez votre server.
+Cela aura pour effet de satisfaire les messages d'avertissement générés par Ramaze, et d'afficher de jolies couleurs quand vous démarrerez votre server.
 
 {{{
 $ gem install win32console
@@ -24,7 +24,7 @@ Le moyen le plus simple d'obtenir Ramaze est d'utliser le gestionaire de package
 
 *** Installer via github
 
-Pour obtenir la version la plus r&eacute;cente, &eacute;tant donn&eacute; que le site rubyforge n&#x27;est pas mis &agrave; jour tr&egrave;s souvent, vous pouvez installer le Gem directement depuis son d&eacute;p&ocirc;t sur Github:
+Pour obtenir la version la plus récente, étant donné que le site rubyforge n'est pas mis à jour très souvent, vous pouvez installer le Gem directement depuis son dépôt sur Github:
 
 {{{
 gem install manveru-ramaze --source=http://gems.github.com
@@ -32,4 +32,4 @@ gem install manveru-ramaze --source=http://gems.github.com
 
 ** Utiliser Git
 
-Si vous pr&eacute;f&eacute;rez obtenir Ramaze en ayant directement acc&egrave;s &agrave; la boite de d&eacute;p&ocirc;t Git, lisez l'article: [[Contributing][Contribuer]].
+Si vous préférez obtenir Ramaze en ayant directement accès à la boite de dépôt Git, lisez l'article: [[Contributing][Contribuer]].

@@ -1,10 +1,10 @@
 * Ramaze Screencasts
 
-Cette s&eacute;rie se screencasts montre comment utiliser Ramaze de fa&ccedil;on visuelle et engageante.
-Il est conseill&eacute; de les consulter dans l&#x27;ordre, sauf si vous &ecirc;tes tr&egrave;s familier avec Ruby et le web-development.
+Cette série se screencasts montre comment utiliser Ramaze de façon visuelle et engageante.
+Il est conseillé de les consulter dans l'ordre, sauf si vous êtes très familier avec Ruby et le web-development.
 
  * [[Screencasts/HelloWorld][Screencasts - Hello World]]
- * [[Screencasts/ActionsAndParameters][Screencasts - Actions et Param&egrave;tres]]
+ * [[Screencasts/ActionsAndParameters][Screencasts - Actions et Paramètres]]
  * [[Screencasts/Templates][Screencasts - Templates]]
  * [[Screencasts/Forms][Screencasts - Formulaires]]
- * [[Screencasts/Layouts][Screencasts - Layouts]] (plus d'actualit&eacute; depuis 2009.05)
+ * [[Screencasts/Layouts][Screencasts - Layouts]] (plus d'actualité depuis 2009.05)
