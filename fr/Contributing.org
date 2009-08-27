@@ -1,0 +1,72 @@
+* Contribuer à Ramaze
+** En utilisant Git
+
+Ramaze utilise [[http://git.or.cz/][Git]] comme système de contrôle de version (VCS). Pour plus d'informations à propos de Git, son utilisation ou son installation, consultez le [[http://www.kernel.org/pub/software/scm/git/docs/user-manual.html][Guide utilisateur de Git]] ou un des liens ci-dessous (en anglais):
+
+  * [[http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html][Git Tutorial]]
+  * [[http://www.sourcemage.org/Git_Guide][Git Guide]]
+  * [[http://www-cs-students.stanford.edu/~blynn/gitmagic/][Git Magic]]
+  * [[http://www.gitcasts.com/][GitCasts]]
+  * [[http://www.kernel.org/pub/software/scm/git/docs/everyday.html][Everyday Git]]
+  * [[http://tomayko.com/writings/the-thing-about-git][The Thing about Git]]
+
+La boite de dépôt Git de Ramaze se trouve sur [[http://github.com/manveru/ramaze/][Github]].
+
+** Obtenir Ramaze
+
+Pour obtenir la version la plus récente (et donc la meilleure), faite simplement un clone de la boite de dépôt:
+
+{{{
+git clone git://github.com/manveru/ramaze.git
+}}}
+
+Après clonage, vous pouvez passer à la dernière version en lançant cette commande dans le répertoire de votre copie de Ramaze:
+
+{{{
+git pull
+}}}
+
+Il est aussi possible de créer votre propre fork de Ramaze sur github.
+Visitez [[http://github.com/manveru/ramaze/tree/master][la page de Ramaze sur Github]] et cliquez sur le bouton 'Fork'.
+
+** Utiliser la version de la boite de dépôt
+
+Pour utiliser la nouvelle version de Ramaze sans avoir à faire ''rake install'' à chaque ''git pull'', ajoutez un fichier à votre installation de Ruby dans le répertoire site_ruby nommé 'ramaze.rb':
+
+{{{
+$ cat /usr/lib/ruby/site_ruby/1.8/ramaze.rb
+require 'rubygems'
+require '/emplacement/de/votre/git/pull/ramaze/lib/ramaze'
+}}}
+
+Ainsi vous aurez toujours la bonne version en utilisant:
+
+{{{ ruby
+require 'ramaze'
+}}}
+
+Il est aussi conseillé de lire l'excellent article de Christian Neukirchen sur  [[http://chneukirchen.org/blog/archive/2008/08/taming-rubylib-with-the-z-shell.html][comment maîtriser $RUBYLIB grâce au Z shell]] pour régler ce problème de façon plus élégante.
+
+** Faire un Patch
+
+Premièrement, assurez vous d'avoir une version à jour pour éviter les conflits:
+
+{{{
+  $ git pull
+}}}
+
+Ensuite créez vos patches:
+
+{{{
+  $ git format-patch origin/HEAD
+}}}
+
+A partir de là, vous pouvez soit utiliser ''git-send-mail'', soit faire une archive tar et l'envoyer par mail:
+
+{{{
+  $ tar -cjf nom_du_patch.tar.bz2 *.patch
+}}}
+
+Envoyez vos patches à [[http://groups.google.com/group/ramaze][ramaze@googlegroups.com]] (vous aurez besoin de rejoindre le groupe d'abord), ou à manveru sur [[irc://chat.freenode.net/ramaze][IRC]].
+
+Si vous avez créé un 'Fork' sur GitHub, ''git push'' et faites une demande pour un 'pull'.

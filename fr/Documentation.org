@@ -1,0 +1,30 @@
+* Plus de documentation sur Ramaze
+** Ressources pour bien débuter
+
+ * [[Walkthrough][Bien commencer avec Ramaze]]
+ * [[Deployment][Deployer une application Ramaze]]
+ * [[http://ramaze.net/todolist.html][Todolist tutoriel]] (2009.05)
+ * [[Screencasts]] (2009.03)
+ * An [[http://github.com/manveru/ramaze/tree/master/doc/tutorial/todolist.html][tutoriel d'introduction]] qui accompagne [[http://github.com/manveru/ramaze/tree/master/examples/todolist/][l'exemple de todolist]] (2009.03)
+ * An [[http://www.jamesbritt.com/betaville/ramaze/understanding_ramaze_templating.html][introduction aux templates dans Ramaze]] (2009.03)
+
+** Documentation
+
+ * [[http://book.ramaze.net][Le livre sur Ramaze]] (gratuit et en ligne)
+ * [[Benchmarks][Performances]]
+ * [[AdvancedDeployment][Déploiement avancé]]
+ * [[UnicodeHandling][Maîtriser Unicode]]
+ * [[http://source.ramaze.net][Parcourir le code source de Ramaze]]
+ * [[http://ramaze.rubyforge.org/rdoc][RDocs (plus d'actualité)]]
+ * [[http://darcs.riffraff.info/ramaze-coverage/][précédent rapport rcov]]
+
+** Communauté
+
+ * [[http://groups.google.com/group/ramaze][Google Group Ramaze]]
+ * [[http://rubyforge.org/pipermail/ramaze-general][Archives de la Mailing List]]
+ * [[irc://chat.freenode.net/ramaze][#ramaze sur irc.freenode.net]]
+ * [[http://embed.mibbit.com/%3Fserver%3Dirc.freenode.net&channel%3D%23ramaze%2C%23ruby-lang&forcePrompt%3Dtrue][Mibbit widget pour #ramaze]], une [[http://java.freenode.net/%3Fchannel%3Dramaze][applet java]] ou [[http://mibbit.com][mibbit.com]] si vous n'avez pas encore de [[http://en.wikipedia.org/wiki/List_of_IRC_clients][client IRC]].
+ * [[http://maps.google.com/maps%3Fq%3Dhttp:%2F%2Fdarcs.ramaze.net%2Framaze%2Fdoc%2Fmeta%2Fusers.kml][Les utilisateurs de Ramaze]]
+ * [[http://rubyforge.org/projects/ramaze][Page sur Rubyforge]]
+ * [[http://en.wikipedia.org/wiki/Ramaze_(web_framework)][La page sur Wikipedia (effacée?)]]
+ * [[SitesPoweredByRamaze][Liste des sites construits avec Ramaze]]

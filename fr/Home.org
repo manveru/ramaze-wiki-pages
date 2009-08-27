@@ -1,14 +1,14 @@
 * Ramaze
 Ramaze est un web-framework simple, léger, modulaire, open-source, et écrit en Ruby.
 
-| En Savoir Plus                     | Pour Débuter                        | S'impliquer                                           |
-|------------------------------------+--------------------------------------------+-------------------------------------------------------|
-| [[Screencasts]]                    | [[Download][Téléchargement]] | [[http://java.freenode.net/?channel=ramaze][Chatter]] |
-| [[http://book.ramaze.net][Livre]]  | [[Walkthrough][Aperçu]]             | [[http://groups.google.com/group/ramaze][Discuter]]   |
-| [[Features][Dispositifs]]          | [[Tutorials][Tutoriels]]                   | [[Promote][Promouvoir]]                               |
-| [[Benchmarks][Performances]]       | [[Walkthrough#examples][Exemples]]         | [[Contributing][Contribuer]]                          |
-| [[Principles][Principes]]          | [[Deployment][Déployer]]            | [[Innate][Nouvelle generation]]                       |
-| [[Documentation]]                  | [[FAQ][Questions/Réponses]]         |                                                       |
+| En Savoir Plus                     | Pour Débuter                           | S'impliquer                                           |
+|------------------------------------+----------------------------------------+-------------------------------------------------------|
+| [[Screencasts]]                    | [[Download][Téléchargement]]           | [[http://java.freenode.net/?channel=ramaze][Chatter]] |
+| [[http://book.ramaze.net][Livre]]  | [[Walkthrough][Aperçu]]                | [[http://groups.google.com/group/ramaze][Discuter]]   |
+| [[Features][Dispositifs]]          | [[Tutorials][Tutoriels]]               | [[Promote][Promouvoir]]                               |
+| [[Benchmarks][Performances]]       | [[Walkthrough#examples][Exemples]]     | [[Contributing][Contribuer]]                          |
+| [[Principles][Principes]]          | [[Deployment][Déployer]]               | [[Innate][Nouvelle generation]]                       |
+| [[Documentation]]                  | [[FAQ][Questions Fréquemment Posées]]  |                                                       |
 
 
 ** Exemple de "Bonjour Monde"

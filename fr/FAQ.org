@@ -1,0 +1,191 @@
+* Questions Fréquemment Posées
+
+** Pourquoi Ramaze semble avoir tant de dépendances?
+
+Ramaze n'a que deux dépendances:
+
+ - innate
+ - rack (essentiel pour innate)
+
+Si la commande 'gem install ramaze' charge plus que ça, cela signifie que vous utilisez une vieille version de RubyGems qui ne fait pas la différence entre les dépendances de développement (qui sont optionnelles) et les dépendances requises à l'utilisation.  Ces "si nombreuses" dépendances ne sont utilisées que pour le développement et les tests, et ne sont pas du tout nécessaire au fonctionnement de Ramaze. La solution est de passer à une version plus récente de RubyGems (1.3.x or higher).
+
+** no such file to load -- ramaze (LoadError)
+
+Symptômes:
+
+{{{
+  start.rb:1:in `require': no such file to load -- ramaze (LoadError) from start.rb:1
+}}}
+
+Solutions (choisissez-en une):
+
+ - ruby -rrubygems start.rb
+ - export RUBYOPT=-rrubygems
+ - require 'rubygems'  # avant require 'ramaze'
+
+** Puis-je utiliser différentes version de Ramaze pour différentes applications?
+
+Certainement!  Il suffit de choisir la version désirée comme ceci:
+
+{{{ ruby
+require 'rubygems'
+gem 'ramaze', '2009.03'
+require 'ramaze'
+}}}
+
+
+** Pourquoi mes fichiers template ne sont pas utilisés?
+
+Assurez-vous que vos fichiers ont la bonne extension pour le moteur de template choisi.
+
+ * .rhtml pour Erubis
+ * .haml pour haml
+ * .xhtml pour Ezamar
+ * etc.
+
+Aussi assurez-vous que vos fichiers sont placés dans le dossier que Ramaze consulte pour trouver les templates. Par défaut, c'est le dossier  view/ .
+
+** Comment gérer les téléchargements de fichiers?
+
+Consulter [[http://github.com/manveru/ramaze/tree/master/examples/app/upload][l'exemple de téléchargement]] dans le dossier 'example'.
+
+** Comment faire pour que Ramaze serve les fichiers statiques?
+
+Par défaut, Ramaze est conçu de façon à servir en statique tout ce qui se trouve dans le dossier 
+public/ de votre application (relatif au fichier contenant l'instruction 
+Ramaze.start). Par exemple, si vous avez un fichier 
+`public/foo/bar.pdf`, vous pouvez le télécharger à l'adresse :
+`http://mydomain.com/foo/bar.pdf`. Vous pouvez changer le dossier publique avec : 
+`Ramaze.options.public_root = 'nouveau/chemin/publique'`
+
+** Comment gérer les exceptions ou les erreurs, ou faire une page 404 personnalisée?
+
+Utilisez Rack pour diriger certaines exceptions vers une action spécifique.  Par exemple, pour re-diriger toute les exceptions vers la methode 'error' de votre MainController:
+
+{{{ ruby
+Rack::RouteExceptions.route( Exception, MainController.r( :error ) )
+}}}
+
+** Comment on prononce Ramaze?
+
+En Anglais, la prononciation officielle est celle du mot Anglais 'amaze' avec un 'r' au début.
+
+Transcription avec [[wp:International%20Phonetic%20Alphabet][wp:l'Alphabet Phonétique International]]:
+  ɹʌˈmejz
+
+Dans une autre langue, une alternative serait:
+
+  'ra' comme dans 'raconter'
+  'ma' comme dans 'malette'
+  'ze' comme dans 'zèbre'
+
+ou, la transcription avec [[wp:International%20Phonetic%20Alphabet][wp:l'Alphabet Phonétique International]]:
+  ɹaˈmazɛ
+  ɾaˈmazɛ
+
+ou, en utilisant les Katakana Japonais:
+  ラマゼ
+
+** Comment traquer les bugs/problèmes?
+
+Il n'y a pas de bug tracker officiel pour Ramaze. Principalement pour les raisons suivantes:
+
+ * Ramaze inclu de bon fichiers de spécification, donc la plupart des problèmes sont réglés avant même de se retrouver sur Github.
+ * Pour ce qui est des modifications ou de véritables bugs, ils sont traités via la mailing list ou le canal IRC, et puis des spécifications sont aussitôt ajoutés. Parfois celui qui découvre le bug fait lui-même un patch et l'envoie. Les patches sont acceptés assez vite généralement.
+
+Néanmoins si vous ressentez vraiment le besoin d'utiliser un bug tracker, soumettez l'idée  [[http://github.com/manveru/ramaze/issues][ici]].
+
+** Logger
+
+Ramaze utilise la bibliothèque Logger (bibliothèque standard Ruby) par défaut, mais laisse le choix tant que la classe utilisée répond à  `#log(niveau, *messages)`.
+
+*** Comment écrire les log?
+
+{{{ ruby
+Ramaze::Log.debug "Un message de debuging"
+Ramaze::Log.warn "Un message d'avertissement"
+Ramaze::Log.info "Un message d'info"
+}}}
+
+*** Comment éviter d'écrire les messages de niveau INFO ou DEBUG?
+
+{{{ ruby
+Ramaze::Log.level = Logger::WARN
+}}}
+
+Les niveaux disponibles sont:
+
+{{{ ruby
+DEBUG < INFO < WARN < ERROR < FATAL < UNKNOWN
+}}}
+
+Pour désactiver complètement le Logger:
+
+{{{ ruby
+  Ramaze::Log.loggers.clear
+}}}
+
+
+*** Comment sauver les log sur des fichiers?
+
+La bibliothèque Logger permet de faire les choses suivantes:
+
+{{{ ruby
+# 1. Créer un logger pour stderr/stdout
+logger = Logger.new($stdout)
+logger = Logger.new($stderr)
+
+# 2. Créer un logger sur fichier
+logger = Logger.new('test.log')
+
+# 3. Créer un logger sur un 'objet' fichier
+file = File.open('test.log', 'a+')
+logger = Logger.new(file)
+
+# 4. Créer un fichier logger qui est limité en taille (une nouvelle ligne efface un ligne du début)
+
+# 10 fichiers d'historique, 5 MB chacun
+logger = Logger.new('test.log', 10, (5 << 20))
+
+# 100 fichiers d'historique, 1 MB chacun
+logger = Logger.new('test.log', 100, (1 << 20))
+
+# 5. Créer un logger qui est actualisé tout les jours/semaines/mois
+
+logger = Logger.new('test.log', 'daily')
+logger = Logger.new('test.log', 'weekly')
+logger = Logger.new('test.log', 'monthly')
+}}}
+
+Pour logger simplement sur $stderr et un fichier
+
+{{{ ruby
+stderr_logger = Logger.new($stderr)
+fichier_logger = Logger.new('ramaze.log')
+Ramaze::Log.loggers = [stderr_logger, fichier_logger]
+}}}
+
+Un logger avec rotation sans sortie sur $stderr (utile en FCGI):
+
+{{{ ruby
+rotatif_logger = Logger.new('ramaze.log', 'daily')
+Ramaze::Log.loggers = [rotatif_logger]
+}}}
+
+
+** Comment changer les options de Ramaze?
+
+Via `Ramaze.start`:
+
+{{{ ruby
+Ramaze.start :adapter => :mongrel, :port => 8080
+}}}
+
+Via `Ramaze.options`:
+
+{{{ ruby
+Ramaze.options.adapter.port = 8080
+Ramaze.options.adapter.handler = :mongrel
+}}}
+
+Voir aussi [[http://github.com/manveru/innate/blob/master/lib/innate/options.rb][options.rb]] et [[http://book.ramaze.net/#_configuration][Journey to Ramaze: Configuration]]
