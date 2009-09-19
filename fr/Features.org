@@ -1,0 +1,10 @@
+* Les Dispositifs de Ramaze
+
+Le but de Ramaze est de donner la liberté de pouvoir utiliser le bon outils pour le travail à effectuer, ceci en se basant sur un système modulaire, et en offrant un large éventail d'options.
+
+Les liens suivant présentent les dispositifs intégrés dans Ramaze, et comment les utiliser.
+
+ * [[Features/Adapters][Dispositifs - Adapters]]
+ * [[Features/Helpers][Dispositifs - Helpers]]
+ * [[Features/Templates][Dispositifs - Templates]]
+ * [[Features/Loggers][Dispositifs - Loggers]]
