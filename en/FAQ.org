@@ -54,6 +54,13 @@ Ramaze automatically uses a view file that matches the action method.  To use a 
 respond(render_view(:another_view))
 }}}
 
+Alternatively, you can alias views:
+
+{{{ ruby
+# Use the 'instead' view when hitting 'requested'
+alias_view 'requested', 'instead'
+}}}
+
 ** How do I handle file uploads?
 
 See [[http://github.com/manveru/ramaze/tree/master/examples/app/upload][the file upload example]] in the examples directory.
