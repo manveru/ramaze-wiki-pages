@@ -61,6 +61,16 @@ Alternatively, you can alias views:
 alias_view 'requested', 'instead'
 }}}
 
+** How do I do routing?
+
+To route requests for /foo to be handled by /bar:
+
+{{{ ruby
+  Innate::Route[ '/foo' ] = '/bar'
+}}}
+
+See the [[http://doc.rubyists.com/ramaze+innate/Innate/Route.html][Innate::Route]] documentation for more examples and info on doing more complex routing (such as with regular expressions or lambdas).
+
 ** How do I handle file uploads?
 
 See [[http://github.com/manveru/ramaze/tree/master/examples/app/upload][the file upload example]] in the examples directory.
