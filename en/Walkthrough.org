@@ -302,6 +302,7 @@ See also these Ramaze application skeletons/protos:
 
   * [[http://github.com/nanodeath/ramastic/tree/master][Mr Bones skeleton]] with OpenID, jQuery, Blueprint, and more
   * [[http://github.com/Pistos/ramaze-proto/tree/master][ramaze-proto]] using jQuery, M4DBI, PostgreSQL, OpenID
+  * [[http://github.com/mwlang/ramaze-protos][mwlang's protos]] using erubis, Sequel and Bacon
 
 *** hello.rb
 {{{ ruby
