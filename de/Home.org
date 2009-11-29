@@ -69,6 +69,7 @@ feed:http://groups.google.com/group/ramaze/feed/rss_v2_0_msgs.xml
 
 ** Andere Frameworks
 
+  * [[http://github.com/botanicus/rango][Rango]], ultralightweight, ultracustomizable, ultracool web framework inspired by Django
   * [[http://borges.rubyforge.org/][Borges]], continuations based ruby web-framework originally ported from SeaSide
   * [[http://camping.rubyforge.org/files/README.html][Camping]], _why's 4k micro-framework
   * [[http://cerise.rubyforge.org/][Cerise]], web-framework modeled on J2EE app servers
