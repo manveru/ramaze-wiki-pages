@@ -71,6 +71,25 @@ To route requests for /foo to be handled by /bar:
 
 See the [[http://doc.rubyists.com/ramaze+innate/Innate/Route.html][Innate::Route]] documentation for more examples and info on doing more complex routing (such as with regular expressions or lambdas).
 
+** How do I dynamically choose a layout?
+
+See [[http://doc.rubyists.com/ramaze+innate/Ramaze/Helper/Layout.html][Ramaze::Helper::Layout]].
+
+For more complex layout needs, you can:
+
+{{{ ruby
+  # class MyController
+  # ...
+    layout { |path,wish|
+      case path
+      when /foo/
+        'some_layout'
+      when /bar/
+        'some_other_layout'
+      end
+    }
+}}}
+
 ** How do I handle file uploads?
 
 See [[http://github.com/manveru/ramaze/tree/master/examples/app/upload][the file upload example]] in the examples directory.
