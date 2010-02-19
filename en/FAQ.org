@@ -75,7 +75,7 @@ See the [[http://doc.rubyists.com/ramaze+innate/Innate/Route.html][Innate::Route
 
 See [[http://doc.rubyists.com/ramaze+innate/Ramaze/Helper/Layout.html][Ramaze::Helper::Layout]].
 
-For more complex layout needs, you can:
+If your layout needs are more complex than that, you can:
 
 {{{ ruby
   # class MyController
