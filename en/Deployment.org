@@ -136,11 +136,11 @@ If you have more than one app, which are supposed to be served under different (
 #### proxy module
 
 $HTTP["host"] =~ "awesome\.example\.com" {
-    proxy.server  = ( "" => "host" => "127.0.0.1", "port" => 7000 )
+    proxy.server  = ( "" => (( "host" => "127.0.0.1", "port" => 7000 )))
 }
 
 $HTTP["host"] =~ "great\.example\.com" {
-    proxy.server  = ( "" => "host" => "127.0.0.1", "port" => 7001 )
+    proxy.server  = ( "" => (( "host" => "127.0.0.1", "port" => 7001 )))
 }
 }}}
 
