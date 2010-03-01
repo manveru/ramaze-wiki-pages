@@ -126,7 +126,7 @@ Secondly, you'll need to add a rule to invoke the proxy. In this example, I'm lo
 #### proxy module
 
 $HTTP["host"] =~ "example\.com" {
-    proxy.server  = ( "" => (( "host" => "127.0.0.1", "port" => 7001 )))
+    proxy.server  = ( "" => (( "host" => "127.0.0.1", "port" => 7000 )))
 }
 }}}
 
