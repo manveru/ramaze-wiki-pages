@@ -51,7 +51,7 @@ end
 
 *** Auth
 
-Simple way to add basic authentication. Check out the [[http://source.ramaze.net/#/examples/auth/auth.rb][auth example]] for an implementation using a database. The [[http://source.ramaze.net/#/examples/simple_auth.rb][simple http auth]] example is another approach to authentication, for =.htaccess= style logins.
+Simple way to add basic authentication. Check out the [[http://github.com/manveru/ramaze/blob/master/lib/ramaze/helper/user.rb][user helper]] for implementing authentication using a model. The [[http://github.com/manveru/ramaze/tree/master/examples/app/auth/][auth example]] is another approach to authentication, without using a model.
 
 *** Cache
 
