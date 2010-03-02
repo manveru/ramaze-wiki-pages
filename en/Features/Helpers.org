@@ -7,20 +7,21 @@ Shortcuts for escaping and unescaping strings for the web.
 Helps you serving files from your Controller in a fast way.
 
 *** Link
-    Provides easy ways to construct links to invoke your application's Controllers and Actions. The methods R and Rs construct hrefs to your controller actions. Rs is a shortcut version of R that assumes you mean the current controller, rather than specifying it as the first argument.
+    Provides easy ways to construct links to invoke your application's Controllers and Actions. The method r constructs a href to your controller actions.
 
 {{{ ruby
-R(AdminController, :users) # => /admin/users
-Rs(:main) #=> /foo/main (if current controller is mapped to /foo)
+AdminController.r(:users) # => /admin/users
+r(:main) #=> /foo/main (if current controller is mapped to /foo)
 }}}
 
 You can also create full link tags with A:
 
 {{{ ruby
-A('text')                       #=> <a href="/text">text</a>
-A('foo/bar')                    #=> <a href="/foo/bar">foo/bar</a>
-A('text', :href => '/foo?x=y')  #=> <a href="/foo?x=y">text</a>
-A('Home', :href => Rs(:/))      #=> <a href="/foo/bar">Home</a>
+Wiki.a(:home)                   # => '<a href="/wiki/home">home</a>'
+Wiki.a('home', :home)           # => '<a href="/wiki/home">home</a>'
+Wiki.a('home', :/)              # => '<a href="/wiki/">home</a>'
+Wiki.a('foo', :/, :foo => :bar) # => '<a href="/wiki/?foo=bar">foo</a>'
+Wiki.a('example', 'http://example.com') # => '<a href="http://example.com">example</a>'
 }}}
 
 *** Redirect
