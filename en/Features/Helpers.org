@@ -36,7 +36,7 @@ Store data on the session for the current and next request only. This is usually
 class MainController < Ramaze::Controller
   def index
     flash[:message] = 'Hello'
-    redirect Rs('welcome')
+    redirect r(:welcome)
   end
 
   def welcome
