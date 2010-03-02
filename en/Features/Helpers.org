@@ -128,7 +128,7 @@ end
 <html>
   <head><title>Partial Render Index</title></head>
   <body>
-    #{render_partial(Rs(:list), 'plain' => true)}
+    #{render_partial(r(:list), 'plain' => true)}
   </body>
 </html>
 }}}
