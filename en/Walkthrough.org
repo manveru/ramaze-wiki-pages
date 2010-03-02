@@ -169,8 +169,7 @@ class MainController < Ramaze::Controller
   layout :layout
 
   # apply to all actions except index
-  layout :layout
-  deny_layout :index
+  set_layout_except :layout => [ :index ]
 
   # apply only to index
   layout :layout => [ :index ]
