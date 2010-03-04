@@ -29,8 +29,7 @@ Ramaze.start
 ** Development
 
   * [[http://github.com/manveru/ramaze][GitHub hosted repository]]
-  * [[http://source.ramaze.net][Ramaze source browser]]
-  * [[http://ramaze.rubyforge.org/rdoc][RDocs]]
+  * [[http://doc.rubyists.com/ramaze+innate/][YARD Documentation]]
 
 ** Recent Patches
 [[feed:http://github.com/feeds/manveru/commits/ramaze/master]]
