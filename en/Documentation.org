@@ -15,8 +15,7 @@
  * [[AdvancedDeployment][Advanced Deployment]]
  * [[UnicodeHandling][Unicode Handling]]
  * [[http://source.ramaze.net][Ramaze source browser]]
- * [[http://ramaze.rubyforge.org/rdoc][RDocs (out of date)]]
- * [[http://darcs.riffraff.info/ramaze-coverage/][old rcov coverage report]]
+ * [[http://doc.rubyists.com/ramaze+innate/][YARD Documentation]]
 
 ** Community
 
