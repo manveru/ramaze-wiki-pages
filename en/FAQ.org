@@ -33,6 +33,7 @@ gem 'ramaze', '2009.03'
 require 'ramaze'
 }}}
 
+See also [[RVM][http://rvm.beginrescueend.com/]] and its [[gemsets][http://rvm.beginrescueend.com/gemsets/basics/]].
 
 ** Why aren't my template files being used?
 
